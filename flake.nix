@@ -24,6 +24,8 @@
             hash = "sha256-6BzDw43bgI08BTEIogDdP2lLCaj7in2DFp4ButFJRWo=";
           };
           cursors = self.callPackage ./pkgs/assets/cursors.nix {};
+          icons = self.callPackage ./pkgs/assets/icons.nix {};
+          sounds = self.callPackage ./pkgs/assets/sounds.nix {};
         });
       };
     };

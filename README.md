@@ -1,4 +1,4 @@
-This flake is not ready for public use.
+This flake is not ready for public use and only has [a few cheap packages](pkgs).
 
 ## Installation
 ### Fonts
