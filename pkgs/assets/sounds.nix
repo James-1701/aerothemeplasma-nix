@@ -8,5 +8,6 @@ stdenvNoCC.mkDerivation {
   src = aerothemeplasma;
 
   unpackPhase = "tar -xzf $src/misc/sounds/sounds.tar.gz";
-  installPhase = "ls && mkdir -p $out/share/sounds && cp -r Windows* $out/share/sounds";
+  installPhase = "mkdir -p $out/share/sounds
+  cp -r Windows* $out/share/sounds";
 }

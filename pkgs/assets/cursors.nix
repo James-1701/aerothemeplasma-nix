@@ -8,5 +8,6 @@ stdenvNoCC.mkDerivation {
   src = aerothemeplasma;
 
   unpackPhase = "tar -xzf $src/misc/cursors/aero-drop.tar.gz";
-  installPhase = "mkdir -p $out/share/icons && cp -r aero-drop $out/share/icons";
+  installPhase = "mkdir -p $out/share/icons
+  cp -r aero-drop $out/share/icons";
 }

@@ -22,6 +22,7 @@ stdenvNoCC.mkDerivation {
     (requireFont "segoeuii.ttf" "sha256-LwAe+oiW8eOK/rpZ7i/6H3clt4qbJ5wftRqI0mj2URA=")
   ];
 
-  phases = [ "installPhase" ];
-  installPhase = "mkdir -p $out/share/fonts/truetype && ln -st $out/share/fonts/truetype $srcs";
+  dontUnpack = true;
+  installPhase = "mkdir -p $out/share/fonts/truetype
+  ln -st $out/share/fonts/truetype $srcs";
 }

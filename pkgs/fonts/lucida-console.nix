@@ -15,6 +15,7 @@ stdenvNoCC.mkDerivation {
       Once you have the file, run "nix store add-file ${name}", then try again.'';
   };
 
-  phases = [ "installPhase" ];
-  installPhase = "mkdir -p $out/share/fonts/truetype && ln -st $out/share/fonts/truetype $src";
+  dontUnpack = true;
+  installPhase = "mkdir -p $out/share/fonts/truetype
+  ln -st $out/share/fonts/truetype $src";
 }
