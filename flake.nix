@@ -15,16 +15,17 @@
             domain = "gitgud.io";
             owner = "wackyideas";
             repo = "AeroThemePlasma";
-            rev = "09696c50230cede7eccb1c67c7d0e92d7af1663f";
-            hash = "sha256-6BzDw43bgI08BTEIogDdP2lLCaj7in2DFp4ButFJRWo=";
+            rev = "9c9d4f2a4e84319351428b8b13f84eb0eb4e2ada";
+            hash = "sha256-fXxNDNm5dFRr5g3k0alEsoc83wyKMIt9Ud/yFOCT3II=";
           };
           cursors = self.callPackage ./pkgs/assets/cursors.nix {};
           icons = self.callPackage ./pkgs/assets/icons.nix {};
           sounds = self.callPackage ./pkgs/assets/sounds.nix {};
 
           authui7 = self.callPackage ./pkgs/plasma/authui7.nix {};
-          colorscheme = self.callPackage ./pkgs/plasma/colorscheme.nix {};
-          layouttemplate = self.callPackage ./pkgs/plasma/layouttemplate.nix {};
+          color-scheme = self.callPackage ./pkgs/plasma/color-scheme.nix {};
+          layout-template = self.callPackage ./pkgs/plasma/layout-template.nix {};
+          seven-black = self.callPackage ./pkgs/plasma/seven-black.nix {};
 
           segoe-ui = self.callPackage ./pkgs/fonts/segoe-ui.nix {};
           lucida-console = self.callPackage ./pkgs/fonts/lucida-console.nix {};

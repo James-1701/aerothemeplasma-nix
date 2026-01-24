@@ -3,7 +3,7 @@
   aerothemeplasma
 }:
 stdenvNoCC.mkDerivation {
-  pname = "aerothemeplasma-layouttemplate";
+  pname = "aerothemeplasma-layout-template";
   version = "2025-10-24";
   src = aerothemeplasma;
 

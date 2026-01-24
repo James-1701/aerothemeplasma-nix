@@ -3,7 +3,7 @@
   aerothemeplasma
 }:
 stdenvNoCC.mkDerivation {
-  pname = "aerothemeplasma-colorscheme";
+  pname = "aerothemeplasma-color-scheme";
   version = "2025-11-14";
   src = aerothemeplasma;
 
