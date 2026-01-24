@@ -9,5 +9,5 @@ stdenvNoCC.mkDerivation {
 
   dontUnpack = true;
   installPhase = "mkdir -p $out/share/plasma/plasmoids
-  cp $src/plasma/plasmoids/io.gitgud.wackyideas.win7showdesktop $out/share/plasma/plasmoids";
+  cp -r $src/plasma/plasmoids/io.gitgud.wackyideas.win7showdesktop $out/share/plasma/plasmoids";
 }
