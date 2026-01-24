@@ -7,8 +7,17 @@
   };
 
   outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, ... }: {
       systems = [ "x86_64-linux" "aarch64-linux" "i686-linux" ];
+      flake.overlays.default = final: prev:
+        withSystem prev.stdenv.hostPlatform.system ({config, ...}: {
+          kdePackages = prev.kdePackages.overrideScope (kfinal: kprev: {
+            libplasma = kprev.libplasma.overrideAttrs (oldAttrs: {
+              postUnpack = "cp -r ${config.packages.aerothemeplasma}/misc/libplasma/src src";
+            });
+          });
+        });
+
       perSystem = { pkgs, ... }: {
         packages = pkgs.lib.makeScope pkgs.newScope (self: {
           aerothemeplasma = pkgs.fetchFromGitLab {
@@ -34,5 +43,5 @@
           win7showdesktop = self.callPackage ./pkgs/plasmoids/win7showdesktop.nix {};
         });
       };
-    };
+    });
 }
