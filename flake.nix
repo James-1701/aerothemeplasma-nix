@@ -36,6 +36,7 @@
 
           authui7 = self.callPackage ./pkgs/plasma/authui7.nix {};
           color-scheme = self.callPackage ./pkgs/plasma/color-scheme.nix {};
+          kvantum = self.callPackage ./pkgs/plasma/kvantum.nix {};
           layout-template = self.callPackage ./pkgs/plasma/layout-template.nix {};
           seven-black = self.callPackage ./pkgs/plasma/seven-black.nix {};
 
