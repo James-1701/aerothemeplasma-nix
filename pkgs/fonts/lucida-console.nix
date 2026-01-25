@@ -16,6 +16,10 @@ stdenvNoCC.mkDerivation {
   };
 
   dontUnpack = true;
-  installPhase = "mkdir -p $out/share/fonts/truetype
-  ln -st $out/share/fonts/truetype $src";
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/share/fonts/truetype
+    ln -st $out/share/fonts/truetype $src
+    runHook postInstall
+  '';
 }

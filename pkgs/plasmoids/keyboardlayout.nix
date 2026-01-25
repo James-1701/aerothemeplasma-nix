@@ -8,6 +8,10 @@ stdenvNoCC.mkDerivation {
   src = aerothemeplasma;
 
   dontUnpack = true;
-  installPhase = "mkdir -p $out/share/plasma/plasmoids
-  cp -r $src/plasma/plasmoids/io.gitgud.wackyideas.keyboardlayout $out/share/plasma/plasmoids";
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/share/plasma/plasmoids
+    cp -r $src/plasma/plasmoids/io.gitgud.wackyideas.keyboardlayout $out/share/plasma/plasmoids
+    runHook postInstall
+  '';
 }

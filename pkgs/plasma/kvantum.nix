@@ -8,6 +8,10 @@ stdenvNoCC.mkDerivation {
   src = aerothemeplasma;
 
   dontUnpack = true;
-  installPhase = "mkdir -p $out/share/Kvantum
-  cp -r $src/misc/kvantum/Kvantum/Windows7Aero $out/share/Kvantum";
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/share/Kvantum
+    cp -r $src/misc/kvantum/Kvantum/Windows7Aero $out/share/Kvantum
+    runHook postInstall
+  '';
 }

@@ -8,6 +8,10 @@ stdenvNoCC.mkDerivation {
   src = aerothemeplasma;
 
   dontUnpack = true;
-  installPhase = "mkdir -p $out/share/color-schemes
-  cp $src/plasma/color_scheme/Aero.colors $out/share/color-schemes";
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/share/color-schemes
+    cp $src/plasma/color_scheme/Aero.colors $out/share/color-schemes
+    runHook postInstall
+  '';
 }

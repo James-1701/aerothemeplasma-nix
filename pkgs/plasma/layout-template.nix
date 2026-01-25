@@ -8,6 +8,10 @@ stdenvNoCC.mkDerivation {
   src = aerothemeplasma;
 
   dontUnpack = true;
-  installPhase = "mkdir -p $out/share/plasma/layout-templates
-  cp -r $src/plasma/layout-templates/io.gitgud.wackyideas.taskbar $out/share/plasma/layout-templates";
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/share/plasma/layout-templates
+    cp -r $src/plasma/layout-templates/io.gitgud.wackyideas.taskbar $out/share/plasma/layout-templates
+    runHook postInstall
+  '';
 }

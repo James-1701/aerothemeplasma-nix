@@ -8,6 +8,10 @@ stdenvNoCC.mkDerivation {
   src = aerothemeplasma;
 
   dontUnpack = true;
-  installPhase = "mkdir -p $out/share/plasma/desktoptheme
-  cp -R $src/plasma/desktoptheme/Seven-Black $out/share/plasma/desktoptheme";
+  installPhase = ''
+    runHook preInstall
+    mkdir -p $out/share/plasma/desktoptheme
+    cp -R $src/plasma/desktoptheme/Seven-Black $out/share/plasma/desktoptheme
+    runHook postInstall
+  '';
 }
