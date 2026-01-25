@@ -18,8 +18,8 @@
           });
         });
 
-      perSystem = { pkgs, ... }: {
-        packages = pkgs.lib.makeScope pkgs.newScope (self: {
+      perSystem = { pkgs, ... }:
+        let scope = pkgs.lib.makeScope pkgs.newScope (self: {
           aerothemeplasma = pkgs.fetchFromGitLab {
             domain = "gitgud.io";
             owner = "wackyideas";
@@ -42,6 +42,8 @@
           keyboardlayout = self.callPackage ./pkgs/plasmoids/keyboardlayout.nix {};
           win7showdesktop = self.callPackage ./pkgs/plasmoids/win7showdesktop.nix {};
         });
+      in {
+        packages = pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) scope;
       };
     });
 }
