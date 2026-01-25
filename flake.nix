@@ -41,6 +41,8 @@
 
           keyboardlayout = self.callPackage ./pkgs/plasmoids/keyboardlayout.nix {};
           win7showdesktop = self.callPackage ./pkgs/plasmoids/win7showdesktop.nix {};
+
+          linver = self.callPackage ./pkgs/software/linver.nix {};
         });
       in {
         packages = pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) scope;
