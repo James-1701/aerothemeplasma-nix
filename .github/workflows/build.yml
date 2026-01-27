@@ -1,0 +1,21 @@
+name: "Build with Cachix"
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "* */6 * * *"
+jobs:
+  build:
+    runs-on: [ubuntu-24.04, ubuntu-24.04-arm] # why is there no ubuntu-latest-arm??
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - run: nix flake update
+      - uses: cachix/cachix-action@15
+        with:
+          name: aerothemeplasma
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      # https://github.com/NixOS/nix/issues/7165#issuecomment-3223875882
+      - run: nix flake show --json | jq --arg arch "$(uname -m)" '.packages.[$arch + "-linux"]|keys[]'| xargs -I {} nix build .#{}

@@ -2,7 +2,7 @@ This flake is highly unfinished and exposes [some basic packages](pkgs).
 
 ## Installation
 ### Fonts
-The `segoe-ui` and `lucida-console` packages require font files from an up-to-date install of Windows 7, found in C:\Windows\Fonts. To check the font version, use `fc-query -f "%{fontversion}" FILE.ttf`.
+The segoe-ui and lucida-console packages require font files from an up-to-date install of Windows 7, found in C:\Windows\Fonts. To check the font version, use `fc-query -f "%{fontversion}" FILE.ttf`.
 
 * Segoe UI: segoeui.ttf (336200), segoeuib.ttf (336200), segoeuii.ttf (336200), seguisb.ttf (327680)
 * Lucida Console: lucon.ttf (327680)
