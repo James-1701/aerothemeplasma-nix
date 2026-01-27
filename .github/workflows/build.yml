@@ -17,5 +17,4 @@ jobs:
         with:
           name: aerothemeplasma
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      # https://github.com/NixOS/nix/issues/7165#issuecomment-3223875882
-      - run: nix flake show --json | jq --arg arch "$(uname -m)" '.packages.[$arch + "-linux"]|keys[]'| xargs -I {} nix build .#{}
+      - run: nix build .#login-sessions
