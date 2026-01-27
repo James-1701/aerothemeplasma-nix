@@ -3,10 +3,10 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: "* */6 * * *"
+    - cron: "0 */6 * * *"
 jobs:
   build:
-    runs-on: [ubuntu-24.04, ubuntu-24.04-arm] # why is there no ubuntu-latest-arm??
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: cachix/install-nix-action@v31
