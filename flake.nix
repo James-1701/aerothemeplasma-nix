@@ -63,7 +63,7 @@
 
             linver = self.callPackage ./pkgs/software/linver.nix {};
 
-            login-sessions = self.callPackage ./pkgs/system/login-sessions.nix {};
+            login-session = self.callPackage ./pkgs/system/login-session.nix {};
           })
         );
       };
