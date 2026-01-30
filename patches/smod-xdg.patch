@@ -1,0 +1,101 @@
+diff --git a/kwin/decoration/kdecoration/config/breezeconfigwidget.cpp b/kwin/decoration/kdecoration/config/breezeconfigwidget.cpp
+index e962216a..b4b5041d 100644
+--- a/kwin/decoration/kdecoration/config/breezeconfigwidget.cpp
++++ b/kwin/decoration/kdecoration/config/breezeconfigwidget.cpp
+@@ -17,6 +17,7 @@
+ #include <QDBusMessage>
+ #include <QFontDatabase>
+ #include <QRegularExpression>
++#include <QStandardPaths>
+ 
+ namespace Breeze
+ {
+@@ -74,15 +75,15 @@ void ConfigWidget::load()
+ 
+     m_ui.hideWidget->setVisible(false);
+     // fill list
+-    QDir system_dir(SMOD::SYSTEM_PATH);
+-    QDir local_dir(SMOD::LOCAL_PATH);
++    QStringList decoration_dirpaths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, SMOD::DECORATIONS_PATH, QStandardPaths::LocateDirectory);
++    QStringList all_files;
+ 
+-    QStringList system_files = system_dir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+-    QStringList local_files = local_dir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
++    for (const QString decoration_dirpath : decoration_dirpaths) {
++        QDir decoration_dir(decoration_dirpath);
++        all_files += decoration_dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
++    }
+ 
+-    QStringList all_files = system_files + local_files;
+     all_files.removeDuplicates();
+-
+     all_files.erase(std::remove_if(all_files.begin(), all_files.end(), [](const QString &a) { return !a.endsWith(".smod.rcc"); }), all_files.end());
+     all_files.replaceInStrings(QRegularExpression("\\.smod\\.rcc$"), "");
+ 
+diff --git a/kwin/decoration/kdecoration/smod/smod.h b/kwin/decoration/kdecoration/smod/smod.h
+index a24fad0e..45c10115 100644
+--- a/kwin/decoration/kdecoration/smod/smod.h
++++ b/kwin/decoration/kdecoration/smod/smod.h
+@@ -4,50 +4,40 @@
+  * Generic reusable code for SMOD
+  */
+ 
+-#include <QDir>
++#include <QStandardPaths>
+ #include <QResource>
+ #include <QString>
+ #include <QFileInfo>
+ 
+ namespace SMOD
+ {
++    const QString DECORATIONS_PATH = "smod/decorations/";
+     const QString SMOD_EXTENSION = ".smod.rcc";
+-    const QString SYSTEM_PATH = "/usr/share/smod/decorations/";
+-    const QString LOCAL_PATH = QDir::homePath() + "/.local/share/smod/decorations/";
+ 
+     static QString currentlyRegisteredResource = "";
+-    static QString currentlyRegisteredPath = SYSTEM_PATH + QStringLiteral("Aero") + SMOD_EXTENSION;
++    static QString currentlyRegisteredPath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, DECORATIONS_PATH + "Aero" + SMOD_EXTENSION);
+ 
+     inline void registerResource(const QString &name)
+     {
+         if(currentlyRegisteredResource != "")
+         {
+-            QString path = LOCAL_PATH + currentlyRegisteredResource + SMOD_EXTENSION;
+-            if(!QFileInfo::exists(path))
+-            {
+-                path = SYSTEM_PATH + currentlyRegisteredResource + SMOD_EXTENSION;
+-            }
+-            if(QFileInfo::exists(path))
++            QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, DECORATIONS_PATH + currentlyRegisteredResource + SMOD_EXTENSION);
++            if(!path.isEmpty())
+             {
+                 printf("smod: Unregistering resource %s\n", path.toStdString().c_str());
+                 QResource::unregisterResource(path);
+             }
+         }
+-        QString path = LOCAL_PATH + name + SMOD_EXTENSION;
+-        printf("smod: Trying to register resource %s\n", path.toStdString().c_str());
+-        if(!QFileInfo::exists(path))
++        printf("smod: Trying to locate SMOD file for %s\n", name.toStdString().c_str());
++        QString path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, DECORATIONS_PATH + name + SMOD_EXTENSION);
++        if(path.isEmpty())
+         {
+-            path = SYSTEM_PATH + name + SMOD_EXTENSION;
+-            printf("smod: File not found in local directory, fallback to system directory %s\n", path.toStdString().c_str());
+-            if(!QFileInfo::exists(path))
+-            {
+-                path = SYSTEM_PATH + QStringLiteral("Aero") + SMOD_EXTENSION;
+-                printf("smod: File not found in system directory, fallback to default theme %s\n", path.toStdString().c_str());
+-            }
++            path = QStandardPaths::locate(QStandardPaths::GenericDataLocation, DECORATIONS_PATH + "Aero" + SMOD_EXTENSION);
++            printf("smod: File not found, fallback to default theme %s\n", path.toStdString().c_str());
+         }
+         printf("smod: Registering resource %s\n", path.toStdString().c_str());
+         QResource::registerResource(path);
+         currentlyRegisteredResource = name;
+         currentlyRegisteredPath = path;
+     }
+-}
++}
+\ No newline at end of file

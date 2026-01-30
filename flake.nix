@@ -45,6 +45,11 @@
             segoe-ui = self.callPackage ./pkgs/fonts/segoe-ui.nix {};
             lucida-console = self.callPackage ./pkgs/fonts/lucida-console.nix {};
 
+            aeroglassblur = self.callPackage ./pkgs/kwin/aeroglassblur.nix {};
+            seventasks-thumbnails = self.callPackage ./pkgs/kwin/seventasks-thumbnails.nix {};
+            smod = self.callPackage ./pkgs/kwin/smod.nix {};
+            smodglow = self.callPackage ./pkgs/kwin/smodglow.nix {};
+
             authui7 = self.callPackage ./pkgs/plasma/authui7.nix {};
             color-scheme = self.callPackage ./pkgs/plasma/color-scheme.nix {};
             kvantum = self.callPackage ./pkgs/plasma/kvantum.nix {};
@@ -52,6 +57,7 @@
             seven-black = self.callPackage ./pkgs/plasma/seven-black.nix {};
 
             keyboardlayout = self.callPackage ./pkgs/plasmoids/keyboardlayout.nix {};
+            sevenstart = self.callPackage ./pkgs/plasmoids/sevenstart.nix {};
             seventasks = self.callPackage ./pkgs/plasmoids/seventasks.nix {};
             win7showdesktop = self.callPackage ./pkgs/plasmoids/win7showdesktop.nix {};
 
