@@ -17,8 +17,8 @@
               domain = "gitgud.io";
               owner = "wackyideas";
               repo = "AeroThemePlasma";
-              rev = "9c9d4f2a4e84319351428b8b13f84eb0eb4e2ada";
-              hash = "sha256-fXxNDNm5dFRr5g3k0alEsoc83wyKMIt9Ud/yFOCT3II=";
+              rev = "d3b1e1eb11d5f43a6e9cbbf6a38f404d9587dbba";
+              hash = "sha256-36lz9E7JsTGWytJI6qk4XKUvwIQKqLBG/W/OBMgdO/4=";
             };
             libplasma = pkgs.kdePackages.libplasma.overrideAttrs (oldAttrs: {
               pname = "aerothemeplasma-libplasma";
@@ -55,12 +55,20 @@
             kvantum = self.callPackage ./pkgs/plasma/kvantum.nix {};
             layout-template = self.callPackage ./pkgs/plasma/layout-template.nix {};
             seven-black = self.callPackage ./pkgs/plasma/seven-black.nix {};
+            shell = self.callPackage ./pkgs/plasma/shell.nix {};
 
+            desktopcontainment = self.callPackage ./pkgs/plasmoids/desktopcontainment.nix {};
+            digitalclocklite = self.callPackage ./pkgs/plasmoids/digitalclocklite.nix {};
             keyboardlayout = self.callPackage ./pkgs/plasmoids/keyboardlayout.nix {};
+            notifications = self.callPackage ./pkgs/plasmoids/notifications.nix {};
+            panel = self.callPackage ./pkgs/plasmoids/panel.nix {};
             sevenstart = self.callPackage ./pkgs/plasmoids/sevenstart.nix {};
             seventasks = self.callPackage ./pkgs/plasmoids/seventasks.nix {};
+            systemtray = self.callPackage ./pkgs/plasmoids/systemtray.nix {};
+            volume = self.callPackage ./pkgs/plasmoids/volume.nix {};
             win7showdesktop = self.callPackage ./pkgs/plasmoids/win7showdesktop.nix {};
 
+            aeroglasspane = self.callPackage ./pkgs/software/aeroglasspane.nix {};
             linver = self.callPackage ./pkgs/software/linver.nix {};
 
             login-session = self.callPackage ./pkgs/system/login-session.nix {};

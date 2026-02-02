@@ -18,5 +18,5 @@ jobs:
           name: aerothemeplasma
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
       - run: nix build .#aeroglassblur .#smodglow # kwin effects
-      - run: nix build .#sevenstart .#seventasks # plasmoids
-      - run: nix build .#linver # software
+      - run: nix build .#desktopcontainment .#notifications .#sevenstart .#seventasks .#systemtray .#volume # plasmoids
+      - run: nix build .#aeroglasspane .#linver # software
