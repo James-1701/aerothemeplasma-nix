@@ -3,7 +3,7 @@
   aerothemeplasma
 }:
 stdenvNoCC.mkDerivation {
-  pname = "aerothemeplasma-kvantum";
+  pname = "aerothemeplasma-kvantum-windows7aero";
   version = "2025-12-30";
   src = aerothemeplasma;
 
