@@ -46,7 +46,6 @@
             lucida-console = self.callPackage ./pkgs/fonts/lucida-console.nix {};
 
             aeroglassblur = self.callPackage ./pkgs/kwin/aeroglassblur.nix {};
-            seventasks-thumbnails = self.callPackage ./pkgs/kwin/seventasks-thumbnails.nix {};
             smod = self.callPackage ./pkgs/kwin/smod.nix {};
             smodglow = self.callPackage ./pkgs/kwin/smodglow.nix {};
 
