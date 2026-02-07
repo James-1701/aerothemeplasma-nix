@@ -7,8 +7,12 @@
   };
 
   outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, self, ... }: {
+    flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, moduleWithSystem, ... }: {
       systems = [ "x86_64-linux" "aarch64-linux" "i686-linux" ];
+
+      flake.nixosModules.default = moduleWithSystem (
+        perSystem@{ config }: import ./modules/system.nix perSystem
+      );
 
       perSystem = { pkgs, system, ... }: {
         packages = pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) (
@@ -71,6 +75,8 @@
             linver = self.callPackage ./pkgs/software/linver.nix {};
 
             login-session = self.callPackage ./pkgs/system/login-session.nix {};
+            plymouthvista = self.callPackage ./pkgs/system/plymouthvista.nix {};
+            sddm-theme-mod = self.callPackage ./pkgs/system/sddm-theme-mod.nix {};
           })
         );
       };
