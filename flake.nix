@@ -10,8 +10,11 @@
     flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, moduleWithSystem, ... }: {
       systems = [ "x86_64-linux" "aarch64-linux" "i686-linux" ];
 
-      flake.nixosModules.default = moduleWithSystem (
+      flake.nixosModules.aerothemeplasma-nix = moduleWithSystem (
         perSystem@{ config }: import ./modules/system.nix perSystem
+      );
+      flake.homeModules.aerothemeplasma-nix = moduleWithSystem (
+        perSystem@{ config }: import ./modules/home.nix perSystem
       );
 
       perSystem = { pkgs, system, ... }: {
