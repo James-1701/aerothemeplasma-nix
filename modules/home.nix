@@ -55,6 +55,7 @@ in
       digitalclocklite panel
 
       pkgs.kdePackages.qtstyleplugin-kvantum
+      libplasma
     ]) ++ lib.optionals config.programs.linver.enable [ atpkgs.linver ];
 
     programs.plasma = lib.mkIf cfg.plasma.enable {

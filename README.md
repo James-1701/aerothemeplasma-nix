@@ -114,7 +114,7 @@ aerothemeplasma = {
 };
 ```
 
-The system `aerothemeplasma.plasma.enable` option just installs the packages, so if you are using plasma-manager, remove it and put this in your home-manager configuration instead:
+The system `aerothemeplasma.plasma.enable` option just installs the packages, so if you are using plasma-manager, drop it and put this in your home-manager configuration instead:
 
 ```nix
 # ./home.nix

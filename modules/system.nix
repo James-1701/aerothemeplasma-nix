@@ -21,14 +21,13 @@ in
 
     services.displayManager.sessionPackages = [ atpkgs.login-session ];
     environment.systemPackages = [
-      atpkgs.libplasma
       pkgs.kdePackages.qtmultimedia # used by shell and sddm
       atpkgs.cursors # used by sddm, haven't found a better way to pass it
     ] ++ lib.optionals cfg.fonts.enable [
       atpkgs.segoe-ui
       atpkgs.lucida-console
     ] ++ (with atpkgs; lib.optionals cfg.plasma.enable [
-      cursors icons sounds
+      icons sounds
 
       authui7 color-scheme kvantum-windows7aero
       layout-template seven-black
@@ -40,6 +39,7 @@ in
       digitalclocklite panel
 
       pkgs.kdePackages.qtstyleplugin-kvantum
+      libplasma
     ]);
 
     boot.plymouth = lib.mkIf cfg.plymouth.enable {
