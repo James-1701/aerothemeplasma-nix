@@ -24,8 +24,8 @@
               domain = "gitgud.io";
               owner = "wackyideas";
               repo = "AeroThemePlasma";
-              rev = "d3b1e1eb11d5f43a6e9cbbf6a38f404d9587dbba";
-              hash = "sha256-36lz9E7JsTGWytJI6qk4XKUvwIQKqLBG/W/OBMgdO/4=";
+              rev = "d572194634735a6a727dc71cc4cf1aaf3ca8ce7a";
+              hash = "sha256-pET+c0gYO9crdIEoQ/ABLkC7Qd9XJ6D1toonglS+xlE=";
             };
             libplasma = pkgs.kdePackages.libplasma.overrideAttrs (oldAttrs: {
               pname = "aerothemeplasma-libplasma";

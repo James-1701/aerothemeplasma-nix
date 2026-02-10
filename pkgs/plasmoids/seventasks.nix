@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-seventasks";
-  version = "2025-07-05";
+  version = "2026-02-03";
   src = aerothemeplasma;
 
   preConfigure = "cd plasma/plasmoids/src/seventasks_src";
