@@ -8,7 +8,14 @@ in
   options.aerothemeplasma = {
     enable = lib.mkEnableOption "the AeroThemePlasma home components";
     plasma.enable = lib.mkEnableOption "the AeroThemePlasma theme";
-    fonts.enable = lib.mkEnableOption "the system's Segoe UI and Lucida Console fonts";
+    fonts = {
+      enable = lib.mkEnableOption "the system's Segoe UI and Lucida Console fonts";
+      size = lib.mkOption {
+        description = "The primary point size of the Segoe UI font.";
+        type = lib.types.ints.positive;
+        default = 9;
+      };
+    };
     soundTheme = lib.mkOption {
       description = "The sound theme to enable.";
       type = lib.types.enum [
@@ -66,14 +73,14 @@ in
       fonts = lib.mkIf cfg.fonts.enable rec {
         general = {
           family = "Segoe UI";
-          pointSize = 9;
+          pointSize = cfg.fonts.size;
         };
         toolbar = general;
         menu = general;
         windowTitle = general;
         small = {
           family = "Segoe UI";
-          pointSize = 8;
+          pointSize = cfg.fonts.size - 1;
         };
       };
 
