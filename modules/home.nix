@@ -89,13 +89,20 @@ in
         blur.enable = false;
         dimAdminMode.enable = false;
       };
-      configFile.kwinrc.Plugins = {
-        dialogparentEnabled = false;
+      configFile.kwinrc = {
+        MouseBindings.CommandWindow1 = "Activate, raise and pass click";
+        Plugins = {
+          fadingpopupsEnabled = false;
+          dialogparentEnabled = false;
+          loginEnabled = false; # "Fade to the desktop when logging in"
+          logoutEnabled = false; # "Fade to the logout screen"
+          slidingpopupsEnabled = false;
 
-        aeroglassblurEnabled = true;
-        smodglowEnabled = true;
+          aeroglassblurEnabled = true;
+          smodglowEnabled = true;
 
-        minimizeallEnabled = true;
+          minimizeallEnabled = true;
+        };
       };
 
       window-rules = lib.mkIf config.programs.linver.enable [{

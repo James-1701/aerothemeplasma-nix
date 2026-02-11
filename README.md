@@ -1,7 +1,7 @@
 # AeroThemePlasma on NixOS
-This [flake](https://wiki.nixos.org/wiki/Flakes) can be used to install AeroThemePlasma (Wayland) on a NixOS unstable system. The theme is installed system-wide and the user is expected to [enable it imperatively](https://gitgud.io/wackyideas/aerothemeplasma/-/blob/master/INSTALL.md#configuring-aerothemeplasma-).
+This [flake](https://wiki.nixos.org/wiki/Flakes) can be used to install [AeroThemePlasma](https://gitgud.io/wackyideas/aerothemeplasma) (Wayland) on a NixOS unstable system. The theme is installed system-wide and the user is expected to [enable it imperatively](https://gitgud.io/wackyideas/aerothemeplasma/-/blob/master/INSTALL.md#configuring-aerothemeplasma-).
 
-Alternatively, there is an **experimental** [plasma-manager](https://github.com/nix-community/plasma-manager)-based module. It can apply the theme for specific users and perform some of the configuring, but it [has to disable declarative panels](#why-is-the-plasma-manager-module-experimental) to avoid undesirable behavior.
+Alternatively, there is an **experimental** [plasma-manager](https://github.com/nix-community/plasma-manager)-based module that can install and enable the theme for specific users, but please consider ["Why is the plasma-manager module experimental?"](#why-is-the-plasma-manager-module-experimental) first.
 
 ![Demo of AeroThemePlasma on a running NixOS system](demo.png)
 
@@ -104,6 +104,7 @@ To install the system components, add this to your NixOS configuration:
 boot.plymouth.enable = true;
 services.displayManager.sddm.enable = true;
 services.desktopManager.plasma6.enable = true;
+services.displayManager.defaultSession = "aerothemeplasma"; # if you want
 
 aerothemeplasma = {
   enable = true;
@@ -114,7 +115,7 @@ aerothemeplasma = {
 };
 ```
 
-The system `aerothemeplasma.plasma.enable` option just installs the packages, so if you are using plasma-manager, drop it and put this in your home-manager configuration instead:
+If you are using plasma-manager, drop `aerothemeplasma.plasma.enable` in favor of putting this in your home-manager configuration:
 
 ```nix
 # ./home.nix
@@ -126,21 +127,27 @@ aerothemeplasma = {
 };
 ```
 
-### All done!
-Rebuild and reboot your system, select the "AeroThemePlasma (Wayland)" session found in the bottom-left button when using the SDDM theme, and log in. Follow the [configuration steps](https://gitgud.io/wackyideas/aerothemeplasma/-/blob/master/INSTALL.md#configuring-aerothemeplasma-) if not using plasma-manager. If you are, it may look a little weird on the first login, but should be fully applied in future logins.
+### Use it
+Rebuild and reboot your system, select "AeroThemePlasma (Wayland)" (bottom-left in the SDDM theme) if not the default, and log in. Follow the [configuration steps](https://gitgud.io/wackyideas/aerothemeplasma/-/blob/master/INSTALL.md#configuring-aerothemeplasma-) if not using plasma-manager. If you are, it may look a little weird on the first login, but should be fully applied in future logins.
 
 ## Potential questions
 ### Why is X11 unsupported?
 [Plasma's X11 session will be dropped in 2027.](https://blogs.kde.org/2025/11/26/going-all-in-on-a-wayland-future/) There are [some minor issues](https://gitgud.io/wackyideas/aerothemeplasma/-/blob/master/DOCUMENTATION.md#current-wayland-issues-) with using AeroThemePlasma on Wayland, but for the most part it works nicely, so I don't want to double the flake surface for something that is going away soon.
 
 ### Why is the plasma-manager module experimental?
-<small><i>No shade to the plasma-manager developers, what I'm about to describe is likely a scripting limitation.</i></small>
+No shade to the plasma-manager developers as these may be Plasma limitations, but two reasons make me uncomfortable to make it the recommended option, so let me engage the yappatron for a moment:
 
-AeroThemePlasma includes a ["shell plugin"](https://wackyideas.neocities.org/blogposts/2025/11/15/kde-custom-shells). Shell plugins get their own settings file storing their [containments](https://develop.kde.org/docs/plasma/scripting/api/#containments-desktops-and-panels), while most other settings are shared. Namely, the contents of a "[panel](https://develop.kde.org/docs/plasma/scripting/api/#panels)" (taskbar) are stored in the shell plugin's file, while the properties of the panel itself are stored in `plasmashellrc`.
+#### <abbr title="Configured in Nix">Declarative</abbr> window rules hide <abbr title="Configured outside Nix (e.g. System Settings)">imperative</abbr> ones
+The opt-in `programs.linver.enable` comes with a window rule. plasma-manager sets the rule list to only the rules that were configured under [`programs.plasma.window-rules`](https://nix-community.github.io/plasma-manager/options.xhtml#opt-programs.plasma.window-rules), which makes it look like the imperative ones were deleted (but they remain, disabled, in the `kwinrc` file). 
 
-Meanwhile, in plasma-manager, [their panel script](https://github.com/nix-community/plasma-manager/blob/fe54ea85c6e4413fba03b84d50f2b431d2f7c831/lib/panel.nix#L16) does not have a way to specify the panel type or restrict the panel to specific shell plugins. Panels set in `programs.plasma.panels` will overwrite the panels of any shell plugin the script runs under, causing unexpected data loss if the panel is applied to the wrong one.
+If you have window rules, you may want to migrate them to [`programs.plasma.window-rules`](https://nix-community.github.io/plasma-manager/options.xhtml#opt-programs.plasma.window-rules) regardless.
 
-The "workaround" is to disable that functionality and let the shell plugin set up its panel imperatively, thus making it experimental. Since the panel properties are stored in `plasmashellrc`, `programs.plasma.overrideConfig` deletes them, so it is also disabled.
+#### No per-shell declarative panels
+AeroThemePlasma includes a ["shell plugin"](https://wackyideas.neocities.org/blogposts/2025/11/15/kde-custom-shells) for Plasma. These get their own settings file storing their [containments](https://develop.kde.org/docs/plasma/scripting/api/#containments-desktops-and-panels), while most other settings are shared across shell plugins. Relevantly, the contents of a "[panel](https://develop.kde.org/docs/plasma/scripting/api/#panels)" containment are stored in the shell plugin's file, while the properties of the panel itself are stored in `plasmashellrc`.
+
+Meanwhile, [plasma-manager's panel script](https://github.com/nix-community/plasma-manager/blob/fe54ea85c6e4413fba03b84d50f2b431d2f7c831/lib/panel.nix#L16) does not have a way to specify the panel type or restrict the panel to specific shell plugins. Panels set in [`programs.plasma.panels`](https://nix-community.github.io/plasma-manager/options.xhtml#opt-programs.plasma.panels) will overwrite the panels of any shell plugin the script runs under, causing unexpected data loss when they could be stored separately.
+
+My "workaround" is to prevent use of [`programs.plasma.panels`](https://nix-community.github.io/plasma-manager/options.xhtml#opt-programs.plasma.panels) and let shell plugins set up their panels imperatively. Since the panel properties are stored in `plasmashellrc`, [`programs.plasma.overrideConfig`](https://nix-community.github.io/plasma-manager/options.xhtml#opt-programs.plasma.overrideConfig) deletes them, so it is also stopped.
 
 ### Why is this section called "Potential questions"?
 I can't call them frequently asked questions when I haven't been asked them a single time yet!
