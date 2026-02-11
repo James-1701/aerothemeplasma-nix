@@ -51,8 +51,8 @@ in
       keyboardlayout win7showdesktop
       seventasks sevenstart aeroglassblur
       shell smod smodglow desktopcontainment
-      systemtray notifications volume
-      digitalclocklite panel
+      systemtray notifications volume flip3d
+      digitalclocklite panel thumbnail-seven
 
       pkgs.kdePackages.qtstyleplugin-kvantum
       libplasma
@@ -103,6 +103,13 @@ in
 
           minimizeallEnabled = true;
         };
+        TabBox.LayoutName = "thumbnail_seven";
+        TabBoxAlternative.LayoutName = "flip3d";
+      };
+
+      shortcuts.kwin = {
+        "Walk Through Windows" = "Alt+Tab";
+        "Walk Through Windows Alternative" = "Meta+Tab";
       };
 
       window-rules = lib.mkIf config.programs.linver.enable [{

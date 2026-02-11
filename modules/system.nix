@@ -35,8 +35,8 @@ in
       keyboardlayout win7showdesktop
       seventasks sevenstart aeroglassblur
       shell smod smodglow desktopcontainment
-      systemtray notifications volume
-      digitalclocklite panel
+      systemtray notifications volume flip3d
+      digitalclocklite panel thumbnail-seven
 
       pkgs.kdePackages.qtstyleplugin-kvantum
       libplasma

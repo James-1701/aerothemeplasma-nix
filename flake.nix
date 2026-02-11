@@ -53,8 +53,10 @@
             lucida-console = self.callPackage ./pkgs/fonts/lucida-console.nix {};
 
             aeroglassblur = self.callPackage ./pkgs/kwin/aeroglassblur.nix {};
+            flip3d = self.callPackage ./pkgs/kwin/flip3d.nix {};
             smod = self.callPackage ./pkgs/kwin/smod.nix {};
             smodglow = self.callPackage ./pkgs/kwin/smodglow.nix {};
+            thumbnail-seven = self.callPackage ./pkgs/kwin/thumbnail-seven.nix {};
 
             authui7 = self.callPackage ./pkgs/plasma/authui7.nix {};
             color-scheme = self.callPackage ./pkgs/plasma/color-scheme.nix {};
