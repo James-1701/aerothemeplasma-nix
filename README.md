@@ -137,7 +137,7 @@ Rebuild and reboot your system, select "AeroThemePlasma (Wayland)" (bottom-left 
 ### Why is the plasma-manager module experimental?
 No shade to the plasma-manager developers as these may be Plasma limitations, but two reasons make me uncomfortable to make it the recommended option, so let me engage the yappatron for a moment:
 
-#### <abbr title="Configured in Nix">Declarative</abbr> window rules hide <abbr title="Configured outside Nix (e.g. System Settings)">imperative</abbr> ones
+#### Declarative window rules hide imperative ones
 The opt-in `programs.linver.enable` comes with a window rule. plasma-manager sets the rule list to only the rules that were configured under [`programs.plasma.window-rules`](https://nix-community.github.io/plasma-manager/options.xhtml#opt-programs.plasma.window-rules), which makes it look like the imperative ones were deleted (but they remain, disabled, in the `kwinrc` file). 
 
 If you have window rules, you may want to migrate them to [`programs.plasma.window-rules`](https://nix-community.github.io/plasma-manager/options.xhtml#opt-programs.plasma.window-rules) regardless.
