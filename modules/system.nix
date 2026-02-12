@@ -58,9 +58,5 @@ in
         };
       };
     };
-
-    fonts.fontconfig.confPackages = lib.mkIf cfg.fonts.enable (with atpkgs; [
-      segoe-ui lucida-console
-    ]);
   };
 }

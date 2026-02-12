@@ -1,7 +1,6 @@
 {
   stdenvNoCC,
-  requireFile,
-  aerothemeplasma
+  requireFile
 }:
 let
   requireFont = name: hash: requireFile {
@@ -28,12 +27,6 @@ stdenvNoCC.mkDerivation {
     runHook preInstall
     mkdir -p $out/share/fonts/truetype
     ln -st $out/share/fonts/truetype $srcs
-
-    mkdir -p $out/etc/fonts/conf.d
-    cp ${aerothemeplasma}/misc/fontconfig/fonts.conf $out/etc/fonts/conf.d/09-segoe-ui.conf
-    # do not change the priority to >= 10! 10 is used
-    # by the nixos "fonts.fontconfig.hinting" option
-
     runHook postInstall
   '';
 }
