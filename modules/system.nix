@@ -37,6 +37,9 @@ in
       shell smod smodglow desktopcontainment
       systemtray notifications volume flip3d
       digitalclocklite panel thumbnail-seven
+      fadingpopupsaero squashaero loginaero
+      dimscreenaero launchfeedback smodsnap
+      aeroglide
 
       pkgs.kdePackages.qtstyleplugin-kvantum
       libplasma

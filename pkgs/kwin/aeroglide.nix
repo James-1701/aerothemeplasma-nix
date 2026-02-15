@@ -7,12 +7,12 @@
   lib
 }:
 stdenv.mkDerivation {
-  pname = "aerothemeplasma-aeroglassblur";
-  version = "2025-11-04";
+  pname = "aerothemeplasma-aeroglide";
+  version = "2025-12-19";
   src = aerothemeplasma;
 
-  preConfigure = "cd kwin/effects_cpp/kde-effects-aeroglassblur";
+  preConfigure = "cd kwin/effects_cpp/aeroglide";
   buildInputs = with kdePackages; [ kwin qttools ];
-  nativeBuildInputs = [ cmake kdePackages.wrapQtAppsHook ];
+  nativeBuildInputs = [ cmake pkg-config kdePackages.wrapQtAppsHook ];
   cmakeFlags = [ (lib.cmakeBool "KWIN_BUILD_WAYLAND" true) ];
 }

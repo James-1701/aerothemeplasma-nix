@@ -2,7 +2,6 @@
   stdenv,
   aerothemeplasma,
   kdePackages,
-  libplasma,
   pkg-config,
   cmake,
   lib

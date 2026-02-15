@@ -53,9 +53,16 @@
             lucida-console = self.callPackage ./pkgs/fonts/lucida-console.nix {};
 
             aeroglassblur = self.callPackage ./pkgs/kwin/aeroglassblur.nix {};
+            aeroglide = self.callPackage ./pkgs/kwin/aeroglide.nix {};
+            dimscreenaero = self.callPackage ./pkgs/kwin/dimscreenaero.nix {};
+            fadingpopupsaero = self.callPackage ./pkgs/kwin/fadingpopupsaero.nix {};
             flip3d = self.callPackage ./pkgs/kwin/flip3d.nix {};
+            launchfeedback = self.callPackage ./pkgs/kwin/launchfeedback.nix {};
+            loginaero = self.callPackage ./pkgs/kwin/loginaero.nix {};
             smod = self.callPackage ./pkgs/kwin/smod.nix {};
+            smodsnap = self.callPackage ./pkgs/kwin/smodsnap.nix {};
             smodglow = self.callPackage ./pkgs/kwin/smodglow.nix {};
+            squashaero = self.callPackage ./pkgs/kwin/squashaero.nix {};
             thumbnail-seven = self.callPackage ./pkgs/kwin/thumbnail-seven.nix {};
 
             authui7 = self.callPackage ./pkgs/plasma/authui7.nix {};

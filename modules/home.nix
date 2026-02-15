@@ -53,6 +53,9 @@ in
       shell smod smodglow desktopcontainment
       systemtray notifications volume flip3d
       digitalclocklite panel thumbnail-seven
+      fadingpopupsaero squashaero loginaero
+      dimscreenaero launchfeedback smodsnap
+      aeroglide
 
       pkgs.kdePackages.qtstyleplugin-kvantum
       libplasma
@@ -96,15 +99,28 @@ in
           dialogparentEnabled = false;
           loginEnabled = false; # "Fade to the desktop when logging in"
           logoutEnabled = false; # "Fade to the logout screen"
+          maximizeEnabled = false; # "Stretch windows when they are maximized or restored"
+          scaleEnabled = false;
+          slideEnabled = false;
           slidingpopupsEnabled = false;
+          windowapertureEnabled = false;
 
+          aeroglideEnabled = true;
           aeroglassblurEnabled = true;
+          dimscreenaeroEnabled = true;
+          fadingpopupsaeroEnabled = true;
+          libkwin_effect_smodsnapEnabled = true;
+          loginaeroEnabled = true;
+          squashaeroEnabled = true;
           smodglowEnabled = true;
 
           minimizeallEnabled = true;
         };
         TabBox.LayoutName = "thumbnail_seven";
         TabBoxAlternative.LayoutName = "flip3d";
+      };
+      configFile.kdeglobals.KDE = {
+        AnimationDurationFactor = 1.414213562373095; # 8 steps from the left in "global animation speed"
       };
 
       shortcuts.kwin = {
