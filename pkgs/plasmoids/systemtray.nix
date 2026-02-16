@@ -10,7 +10,12 @@ stdenv.mkDerivation {
   version = "2025-07-05";
   src = aerothemeplasma;
 
-  preConfigure = "cd plasma/plasmoids/src/systemtray_src";
+  preConfigure = ''
+    cd plasma/plasmoids/src/systemtray_src
+    shopt -s globstar
+    substituteInPlace systemtray/package/contents/**/*.qml --replace-quiet \
+      "import org.kde.plasma.core" "import io.gitgud.wackyideas.plasma.core"
+  '';
   buildInputs = with kdePackages; [
     libplasma qtwayland knotifyconfig
     kitemmodels kstatusnotifieritem

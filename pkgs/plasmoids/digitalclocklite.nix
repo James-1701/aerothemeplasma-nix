@@ -10,8 +10,12 @@ stdenvNoCC.mkDerivation {
   dontUnpack = true;
   installPhase = ''
     runHook preInstall
+
     mkdir -p $out/share/plasma/plasmoids
     cp -r $src/plasma/plasmoids/io.gitgud.wackyideas.digitalclocklite $out/share/plasma/plasmoids
+    substituteInPlace $out/share/plasma/plasmoids/io.gitgud.wackyideas.digitalclocklite/contents/ui/*.qml \
+      --replace-quiet "import org.kde.plasma.core" "import io.gitgud.wackyideas.plasma.core"
+
     runHook postInstall
   '';
 }
