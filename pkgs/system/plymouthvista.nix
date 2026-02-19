@@ -8,12 +8,12 @@
 }:
 stdenvNoCC.mkDerivation {
   pname = "aerothemeplasma-plymouthvista";
-  version = "2026-02-04";
+  version = "2026-02-19";
   src = fetchFromGitHub {
     owner = "furkrn";
     repo = "PlymouthVista";
-    rev = "c659ea86484dca33f902e54ddc77437b78e4dea9";
-    hash = "sha256-qSU4qni/Hcth8QlnjJhUHvtaNhoXTS089DiBjc8cuWY=";
+    rev = "04174bdf06d7cb35869045862de05f9137628aef";
+    hash = "sha256-lWUEM1tGVxHSA763zZot0U8j1DDcK7Kk0111/DL4Qxk=";
   };
 
   env = {
