@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-kcmloader";
-  version = "2026-02-03";
+  version = "2025-07-14";
   src = aerothemeplasma;
 
   preConfigure = "cd plasma/aerothemeplasma-kcmloader";
