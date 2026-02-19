@@ -27,26 +27,8 @@
               rev = "d572194634735a6a727dc71cc4cf1aaf3ca8ce7a";
               hash = "sha256-pET+c0gYO9crdIEoQ/ABLkC7Qd9XJ6D1toonglS+xlE=";
             };
-            libplasma = pkgs.kdePackages.libplasma.overrideAttrs (oldAttrs: {
-              pname = "aerothemeplasma-libplasma";
-              postPatch = ''
-                shopt -s globstar
-                cp -r ${self.aerothemeplasma}/misc/libplasma/src .
-
-                substituteInPlace src/**/CMakeLists.txt \
-                  --replace-warn 'URI "org.kde.plasma.' 'URI "io.gitgud.wackyideas.plasma.' \
-                  --replace-warn "EXPORT_NAME Plasma" "OUTPUT_NAME ATPlasma"
-                substituteInPlace src/**/*.qml --replace-quiet "import org.kde.plasma." "import io.gitgud.wackyideas.plasma."
-
-                substituteInPlace src/declarativeimports/core/tooltipdialog.cpp --replace-fail \
-                  'SourceFromModule("org.kde.plasma.' 'SourceFromModule("io.gitgud.wackyideas.plasma.'
-
-                substituteInPlace src/declarativeimports/CMakeLists.txt --replace-fail "add_subdirectory(kirigamiplasmastyle)" ""
-                substituteInPlace src/plasma/CMakeLists.txt --replace-fail "add_subdirectory(packagestructure)" ""
-              '';
-              ninjaFlags = ["corebindingsplugin"];
-              postFixup = "rm -rf $out/share";
-            });
+            libplasma = self.callPackage ./pkgs/hacks/libplasma.nix {};
+            plasma-workspace = self.callPackage ./pkgs/hacks/plasma-workspace.nix {};
 
             cursors = self.callPackage ./pkgs/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/assets/icons.nix {};

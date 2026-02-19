@@ -22,6 +22,7 @@ in
     services.displayManager.sessionPackages = [ atpkgs.login-session ];
     environment.systemPackages = [
       pkgs.kdePackages.qtmultimedia # used by shell and sddm
+      (lib.lowPrio atpkgs.plasma-workspace)
       atpkgs.cursors # used by sddm, haven't found a better way to pass it
     ] ++ lib.optionals cfg.fonts.enable [
       atpkgs.segoe-ui
