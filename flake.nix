@@ -52,6 +52,7 @@
 
             authui7 = self.callPackage ./pkgs/plasma/authui7.nix {};
             color-scheme = self.callPackage ./pkgs/plasma/color-scheme.nix {};
+            kcmloader = self.callPackage ./pkgs/plasma/kcmloader.nix {};
             kvantum-windows7aero = self.callPackage ./pkgs/plasma/kvantum-windows7aero.nix {};
             layout-template = self.callPackage ./pkgs/plasma/layout-template.nix {};
             seven-black = self.callPackage ./pkgs/plasma/seven-black.nix {};

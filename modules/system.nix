@@ -40,7 +40,7 @@ in
       digitalclocklite panel thumbnail-seven
       fadingpopupsaero squashaero loginaero
       dimscreenaero launchfeedback smodsnap
-      aeroglide
+      aeroglide kcmloader
 
       pkgs.kdePackages.qtstyleplugin-kvantum
       libplasma
