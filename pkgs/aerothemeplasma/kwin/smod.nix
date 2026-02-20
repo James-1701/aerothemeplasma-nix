@@ -12,7 +12,7 @@ stdenv.mkDerivation {
   src = aerothemeplasma;
 
   preConfigure = "cd kwin/decoration";
-  patches = [ ../../patches/smod-xdg.patch ];
+  patches = [ ../../../patches/smod-xdg.patch ];
   buildInputs = with kdePackages; [
     extra-cmake-modules qtbase kirigami
     kcoreaddons kcolorscheme kguiaddons
