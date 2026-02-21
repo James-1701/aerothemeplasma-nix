@@ -62,12 +62,12 @@
             smod = self.callPackage ./pkgs/aeroshell/kwin/smod.nix {};
             smodglow = self.callPackage ./pkgs/aeroshell/kwin/smodglow.nix {};
             smodsnap = self.callPackage ./pkgs/aeroshell/kwin/smodsnap.nix {};
+            squashaero = self.callPackage ./pkgs/aeroshell/kwin/squashaero.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
             sounds = self.callPackage ./pkgs/aerothemeplasma/assets/sounds.nix {};
 
-            squashaero = self.callPackage ./pkgs/aerothemeplasma/kwin/squashaero.nix {};
             thumbnail-seven = self.callPackage ./pkgs/aerothemeplasma/kwin/thumbnail-seven.nix {};
 
             authui7 = self.callPackage ./pkgs/aerothemeplasma/plasma/authui7.nix {};
