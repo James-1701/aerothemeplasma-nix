@@ -43,7 +43,7 @@ in
       aeroglide kcmloader
 
       pkgs.kdePackages.qtstyleplugin-kvantum
-      libplasma libtaskmanager
+      libplasma libtaskmanager libshowdesktop
     ]);
 
     boot.plymouth = lib.mkIf cfg.plymouth.enable {

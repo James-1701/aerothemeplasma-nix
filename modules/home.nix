@@ -58,7 +58,7 @@ in
       aeroglide kcmloader
 
       pkgs.kdePackages.qtstyleplugin-kvantum
-      libplasma libtaskmanager
+      libplasma libtaskmanager libshowdesktop
     ]) ++ lib.optionals config.programs.linver.enable [ atpkgs.linver ];
 
     programs.plasma = lib.mkIf cfg.plasma.enable {
