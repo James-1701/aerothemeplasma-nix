@@ -1,11 +1,11 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  aeroshell-kwin-repo
 }:
 stdenvNoCC.mkDerivation {
-  pname = "aerothemeplasma-loginaero";
-  version = "2025-10-22";
-  src = aerothemeplasma;
+  pname = "aeroshell-loginaero";
+  version = "2026-02-21";
+  src = aeroshell-kwin-repo;
 
   dontUnpack = true;
   installPhase = ''
@@ -14,4 +14,5 @@ stdenvNoCC.mkDerivation {
     cp -r $src/kwin/effects/loginaero $out/share/kwin/effects
     runHook postInstall
   '';
+  dontFixup = true;
 }
