@@ -46,12 +46,12 @@
             plasma-workspace = self.callPackage ./pkgs/aeroshell/hacks/plasma-workspace.nix {};
 
             aeroglassblur = self.callPackage ./pkgs/aeroshell/kwin/aeroglassblur.nix {};
+            aeroglide = self.callPackage ./pkgs/aeroshell/kwin/aeroglide.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
             sounds = self.callPackage ./pkgs/aerothemeplasma/assets/sounds.nix {};
 
-            aeroglide = self.callPackage ./pkgs/aerothemeplasma/kwin/aeroglide.nix {};
             dimscreenaero = self.callPackage ./pkgs/aerothemeplasma/kwin/dimscreenaero.nix {};
             fadingpopupsaero = self.callPackage ./pkgs/aerothemeplasma/kwin/fadingpopupsaero.nix {};
             flip3d = self.callPackage ./pkgs/aerothemeplasma/kwin/flip3d.nix {};
