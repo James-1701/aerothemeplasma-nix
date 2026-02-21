@@ -52,7 +52,7 @@ in
       seventasks sevenstart aeroglassblur
       shell smod smodglow desktopcontainment
       systemtray notifications volume flip3d
-      digitalclocklite panel thumbnail-seven
+      digitalclocklite panel thumbnail-aero
       fadingpopupsaero squashaero loginaero
       dimscreenaero launchfeedback smodsnap
       aeroglide kcmloader
@@ -116,7 +116,7 @@ in
 
           minimizeallEnabled = true;
         };
-        TabBox.LayoutName = "thumbnail_seven";
+        TabBox.LayoutName = "thumbnail_aero";
         TabBoxAlternative.LayoutName = "flip3d";
       };
       configFile.kdeglobals.KDE = {

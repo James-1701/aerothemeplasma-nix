@@ -37,7 +37,7 @@ in
       seventasks sevenstart aeroglassblur
       shell smod smodglow desktopcontainment
       systemtray notifications volume flip3d
-      digitalclocklite panel thumbnail-seven
+      digitalclocklite panel thumbnail-aero
       fadingpopupsaero squashaero loginaero
       dimscreenaero launchfeedback smodsnap
       aeroglide kcmloader
