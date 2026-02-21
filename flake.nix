@@ -27,6 +27,14 @@
               rev = "d572194634735a6a727dc71cc4cf1aaf3ca8ce7a";
               hash = "sha256-pET+c0gYO9crdIEoQ/ABLkC7Qd9XJ6D1toonglS+xlE=";
             };
+            aerothemeplasma-icons-repo = pkgs.fetchFromGitLab {
+              domain = "gitgud.io";
+              owner = "aeroshell";
+              repo = "atp/aerothemeplasma-icons";
+              rev = "44dbe78b76c8b0d55343428b6b179716c36fd7f6";
+              hash = "sha256-jBTUgLpxhT/tVB5JTeAcxJ8zNyAK8gffGAiq3fOF1LE=";
+            };
+
             libplasma = self.callPackage ./pkgs/aerothemeplasma/hacks/libplasma.nix {};
             plasma-workspace = self.callPackage ./pkgs/aerothemeplasma/hacks/plasma-workspace.nix {};
 
