@@ -60,13 +60,13 @@
             launchfeedback = self.callPackage ./pkgs/aeroshell/kwin/launchfeedback.nix {};
             loginaero = self.callPackage ./pkgs/aeroshell/kwin/loginaero.nix {};
             smod = self.callPackage ./pkgs/aeroshell/kwin/smod.nix {};
+            smodglow = self.callPackage ./pkgs/aeroshell/kwin/smodglow.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
             sounds = self.callPackage ./pkgs/aerothemeplasma/assets/sounds.nix {};
 
             smodsnap = self.callPackage ./pkgs/aerothemeplasma/kwin/smodsnap.nix {};
-            smodglow = self.callPackage ./pkgs/aerothemeplasma/kwin/smodglow.nix {};
             squashaero = self.callPackage ./pkgs/aerothemeplasma/kwin/squashaero.nix {};
             thumbnail-seven = self.callPackage ./pkgs/aerothemeplasma/kwin/thumbnail-seven.nix {};
 

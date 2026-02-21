@@ -1,6 +1,6 @@
 {
   stdenv,
-  aerothemeplasma,
+  aeroshell-smod-repo,
   kdePackages,
   pkg-config,
   smod,
@@ -8,11 +8,11 @@
   lib
 }:
 stdenv.mkDerivation {
-  pname = "aerothemeplasma-smodglow";
-  version = "2025-10-22";
-  src = aerothemeplasma;
+  pname = "aeroshell-smodglow";
+  version = "2026-02-20";
+  src = aeroshell-smod-repo;
 
-  preConfigure = "cd kwin/effects_cpp/smodglow";
+  preConfigure = "cd smodglow";
   buildInputs = with kdePackages; [ kwin smod ];
   nativeBuildInputs = [ cmake pkg-config kdePackages.wrapQtAppsHook ];
   cmakeFlags = [ (lib.cmakeBool "KWIN_BUILD_WAYLAND" true) ];
