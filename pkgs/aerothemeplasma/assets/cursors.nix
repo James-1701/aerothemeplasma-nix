@@ -1,21 +1,17 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  aerothemeplasma-icons-repo
 }:
 stdenvNoCC.mkDerivation {
   pname = "aerothemeplasma-cursors";
-  version = "2024-08-09";
-  src = aerothemeplasma;
+  version = "2026-01-25";
+  src = aerothemeplasma-icons-repo;
 
-  unpackPhase = ''
-    runHook preUnpack
-    tar -xzf $src/misc/cursors/aero-drop.tar.gz
-    runHook postUnpack
-  '';
   installPhase = ''
     runHook preInstall
     mkdir -p $out/share/icons
     cp -r aero-drop $out/share/icons
     runHook postInstall
   '';
+  dontFixup = true;
 }
