@@ -34,15 +34,23 @@
               rev = "44dbe78b76c8b0d55343428b6b179716c36fd7f6";
               hash = "sha256-jBTUgLpxhT/tVB5JTeAcxJ8zNyAK8gffGAiq3fOF1LE=";
             };
+            aeroshell-kwin-repo = pkgs.fetchFromGitLab {
+              domain = "gitgud.io";
+              owner = "aeroshell";
+              repo = "aeroshell-kwin-components";
+              rev = "326214ef964d24307fdf4482b61ee2001f4d9541";
+              hash = "sha256-WOzYDtrIgNQwtifDNbOun324WvKFWcuuvdrG15gOAok=";
+            };
 
             libplasma = self.callPackage ./pkgs/aeroshell/hacks/libplasma.nix {};
             plasma-workspace = self.callPackage ./pkgs/aeroshell/hacks/plasma-workspace.nix {};
+
+            aeroglassblur = self.callPackage ./pkgs/aeroshell/kwin/aeroglassblur.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
             sounds = self.callPackage ./pkgs/aerothemeplasma/assets/sounds.nix {};
 
-            aeroglassblur = self.callPackage ./pkgs/aerothemeplasma/kwin/aeroglassblur.nix {};
             aeroglide = self.callPackage ./pkgs/aerothemeplasma/kwin/aeroglide.nix {};
             dimscreenaero = self.callPackage ./pkgs/aerothemeplasma/kwin/dimscreenaero.nix {};
             fadingpopupsaero = self.callPackage ./pkgs/aerothemeplasma/kwin/fadingpopupsaero.nix {};

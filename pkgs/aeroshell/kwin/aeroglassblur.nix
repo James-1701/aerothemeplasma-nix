@@ -1,17 +1,17 @@
 {
   stdenv,
-  aerothemeplasma,
+  aeroshell-kwin-repo,
   kdePackages,
   pkg-config,
   cmake,
   lib
 }:
 stdenv.mkDerivation {
-  pname = "aerothemeplasma-aeroglassblur";
-  version = "2025-11-04";
-  src = aerothemeplasma;
+  pname = "aeroshell-aeroglassblur";
+  version = "2026-02-21";
+  src = aeroshell-kwin-repo;
 
-  preConfigure = "cd kwin/effects_cpp/kde-effects-aeroglassblur";
+  preConfigure = "cd effects_cpp/wayland/kde-effects-aeroglassblur";
   buildInputs = with kdePackages; [ kwin qttools ];
   nativeBuildInputs = [ cmake kdePackages.wrapQtAppsHook ];
   cmakeFlags = [ (lib.cmakeBool "KWIN_BUILD_WAYLAND" true) ];
