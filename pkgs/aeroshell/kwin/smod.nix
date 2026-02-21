@@ -1,17 +1,17 @@
 {
   stdenv,
-  aerothemeplasma,
+  aeroshell-smod-repo,
+  aeroshell-kwin-repo,
   kdePackages,
   pkg-config,
   cmake,
   lib
 }:
 stdenv.mkDerivation {
-  pname = "aerothemeplasma-smod";
-  version = "2025-11-24";
-  src = aerothemeplasma;
+  pname = "aeroshell-smod";
+  version = "2026-02-20";
+  src = aeroshell-smod-repo;
 
-  preConfigure = "cd kwin/decoration";
   patches = [ ../../../patches/smod-xdg.patch ];
   buildInputs = with kdePackages; [
     extra-cmake-modules qtbase kirigami
@@ -20,5 +20,5 @@ stdenv.mkDerivation {
     kdecoration kcmutils
   ];
   nativeBuildInputs = [ cmake pkg-config kdePackages.wrapQtAppsHook ];
-  postFixup = "rm -rf $out/share/locale && mkdir -p $out/share && cp -r $src/kwin/smod $out/share";
+  postFixup = "rm -rf $out/share/locale && mkdir -p $out/share && cp -r ${aeroshell-kwin-repo}/smod $out/share";
 }

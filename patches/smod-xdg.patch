@@ -1,7 +1,7 @@
-diff --git a/kwin/decoration/kdecoration/config/breezeconfigwidget.cpp b/kwin/decoration/kdecoration/config/breezeconfigwidget.cpp
+diff --git a/kdecoration/config/breezeconfigwidget.cpp b/kdecoration/config/breezeconfigwidget.cpp
 index e962216a..b4b5041d 100644
---- a/kwin/decoration/kdecoration/config/breezeconfigwidget.cpp
-+++ b/kwin/decoration/kdecoration/config/breezeconfigwidget.cpp
+--- a/kdecoration/config/breezeconfigwidget.cpp
++++ b/kdecoration/config/breezeconfigwidget.cpp
 @@ -17,6 +17,7 @@
  #include <QDBusMessage>
  #include <QFontDatabase>
@@ -32,10 +32,10 @@ index e962216a..b4b5041d 100644
      all_files.erase(std::remove_if(all_files.begin(), all_files.end(), [](const QString &a) { return !a.endsWith(".smod.rcc"); }), all_files.end());
      all_files.replaceInStrings(QRegularExpression("\\.smod\\.rcc$"), "");
  
-diff --git a/kwin/decoration/kdecoration/smod/smod.h b/kwin/decoration/kdecoration/smod/smod.h
+diff --git a/kdecoration/smod/smod.h b/kdecoration/smod/smod.h
 index a24fad0e..45c10115 100644
---- a/kwin/decoration/kdecoration/smod/smod.h
-+++ b/kwin/decoration/kdecoration/smod/smod.h
+--- a/kdecoration/smod/smod.h
++++ b/kdecoration/smod/smod.h
 @@ -4,50 +4,40 @@
   * Generic reusable code for SMOD
   */

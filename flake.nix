@@ -41,6 +41,13 @@
               rev = "326214ef964d24307fdf4482b61ee2001f4d9541";
               hash = "sha256-WOzYDtrIgNQwtifDNbOun324WvKFWcuuvdrG15gOAok=";
             };
+            aeroshell-smod-repo = pkgs.fetchFromGitLab {
+              domain = "gitgud.io";
+              owner = "aeroshell";
+              repo = "smod";
+              rev = "1943d7c71fb3cc73e0c8a3a0b38ad28a8e8acf7e";
+              hash = "sha256-rPgTyI6IBojd6vjDa8Vr2jBumD7NVAWrx1pDlbL2rEY=";
+            };
 
             libplasma = self.callPackage ./pkgs/aeroshell/hacks/libplasma.nix {};
             plasma-workspace = self.callPackage ./pkgs/aeroshell/hacks/plasma-workspace.nix {};
@@ -52,12 +59,12 @@
             flip3d = self.callPackage ./pkgs/aeroshell/kwin/flip3d.nix {};
             launchfeedback = self.callPackage ./pkgs/aeroshell/kwin/launchfeedback.nix {};
             loginaero = self.callPackage ./pkgs/aeroshell/kwin/loginaero.nix {};
+            smod = self.callPackage ./pkgs/aeroshell/kwin/smod.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
             sounds = self.callPackage ./pkgs/aerothemeplasma/assets/sounds.nix {};
 
-            smod = self.callPackage ./pkgs/aerothemeplasma/kwin/smod.nix {};
             smodsnap = self.callPackage ./pkgs/aerothemeplasma/kwin/smodsnap.nix {};
             smodglow = self.callPackage ./pkgs/aerothemeplasma/kwin/smodglow.nix {};
             squashaero = self.callPackage ./pkgs/aerothemeplasma/kwin/squashaero.nix {};
