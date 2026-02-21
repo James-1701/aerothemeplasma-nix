@@ -1,11 +1,11 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  aeroshell-kwin-repo
 }:
 stdenvNoCC.mkDerivation {
-  pname = "aerothemeplasma-flip3d";
-  version = "2025-10-22";
-  src = aerothemeplasma;
+  pname = "aeroshell-flip3d";
+  version = "2026-02-21";
+  src = aeroshell-kwin-repo;
 
   dontUnpack = true;
   installPhase = ''
@@ -14,4 +14,5 @@ stdenvNoCC.mkDerivation {
     cp -r $src/kwin/tabbox/flip3d $out/share/kwin/tabbox
     runHook postInstall
   '';
+  dontFixup = true;
 }
