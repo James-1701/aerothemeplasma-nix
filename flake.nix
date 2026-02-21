@@ -47,12 +47,12 @@
 
             aeroglassblur = self.callPackage ./pkgs/aeroshell/kwin/aeroglassblur.nix {};
             aeroglide = self.callPackage ./pkgs/aeroshell/kwin/aeroglide.nix {};
+            dimscreenaero = self.callPackage ./pkgs/aeroshell/kwin/dimscreenaero.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
             sounds = self.callPackage ./pkgs/aerothemeplasma/assets/sounds.nix {};
 
-            dimscreenaero = self.callPackage ./pkgs/aerothemeplasma/kwin/dimscreenaero.nix {};
             fadingpopupsaero = self.callPackage ./pkgs/aerothemeplasma/kwin/fadingpopupsaero.nix {};
             flip3d = self.callPackage ./pkgs/aerothemeplasma/kwin/flip3d.nix {};
             launchfeedback = self.callPackage ./pkgs/aerothemeplasma/kwin/launchfeedback.nix {};
