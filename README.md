@@ -137,7 +137,7 @@ If you are using plasma-manager, some options may not apply until you log in a s
 [Plasma's X11 session will be dropped in 2027.](https://blogs.kde.org/2025/11/26/going-all-in-on-a-wayland-future/) There are [some minor issues](https://gitgud.io/wackyideas/aerothemeplasma/-/blob/master/DOCUMENTATION.md#current-wayland-issues-) with using AeroThemePlasma on Wayland, but for the most part it works nicely, so I don't want to double the flake surface for something that is going away soon.
 
 ### Why did tooltips break after restarting `plasmashell`?
-Under the AeroThemePlasma session it's `atplasmashell`, so you should restart that instead. If you use `plasmashell`, it will start without the tooltip patch.
+Under the AeroThemePlasma session it's called `aeroshell`, so you should restart that instead. If you use `plasmashell`, it will start without the tooltip patch.
 
 ### Why is the plasma-manager module experimental?
 No shade to the plasma-manager developers as these may be Plasma limitations, but two reasons make me uncomfortable to make it the recommended option. Engage the yappatron:

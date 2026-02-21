@@ -36,7 +36,7 @@
             };
 
             libplasma = self.callPackage ./pkgs/aeroshell/hacks/libplasma.nix {};
-            plasma-workspace = self.callPackage ./pkgs/aerothemeplasma/hacks/plasma-workspace.nix {};
+            plasma-workspace = self.callPackage ./pkgs/aeroshell/hacks/plasma-workspace.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
