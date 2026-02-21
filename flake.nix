@@ -73,6 +73,7 @@
             thumbnail-aero = self.callPackage ./pkgs/aeroshell/kwin/thumbnail-aero.nix {};
 
             kcmloader = self.callPackage ./pkgs/aeroshell/plasma/kcmloader.nix {};
+            libtaskmanager = self.callPackage ./pkgs/aeroshell/plasma/libtaskmanager.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
