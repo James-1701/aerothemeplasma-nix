@@ -50,12 +50,12 @@
             dimscreenaero = self.callPackage ./pkgs/aeroshell/kwin/dimscreenaero.nix {};
             fadingpopupsaero = self.callPackage ./pkgs/aeroshell/kwin/fadingpopupsaero.nix {};
             flip3d = self.callPackage ./pkgs/aeroshell/kwin/flip3d.nix {};
+            launchfeedback = self.callPackage ./pkgs/aeroshell/kwin/launchfeedback.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
             sounds = self.callPackage ./pkgs/aerothemeplasma/assets/sounds.nix {};
 
-            launchfeedback = self.callPackage ./pkgs/aerothemeplasma/kwin/launchfeedback.nix {};
             loginaero = self.callPackage ./pkgs/aerothemeplasma/kwin/loginaero.nix {};
             smod = self.callPackage ./pkgs/aerothemeplasma/kwin/smod.nix {};
             smodsnap = self.callPackage ./pkgs/aerothemeplasma/kwin/smodsnap.nix {};
