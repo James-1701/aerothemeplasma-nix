@@ -1,12 +1,17 @@
 {
   kdePackages,
-  aerothemeplasma
+  fetchpatch
 }:
 kdePackages.libplasma.overrideAttrs (oldAttrs: {
-  pname = "aerothemeplasma-libplasma";
+  pname = "aeroshell-libplasma";
+  patches = [
+    (fetchpatch {
+      url = "https://gitgud.io/aeroshell/libplasma/-/commit/3b0709a266625c00d3e7d09d4eeecb9ff52e4d41.patch";
+      hash = "sha256-faf2gyd7y6uA/oAV/+IMOfYbNOO9wmvh9IyTItYFTyE=";
+    })
+  ];
   postPatch = ''
     shopt -s globstar
-    cp -r ${aerothemeplasma}/misc/libplasma/src .
 
     substituteInPlace src/**/CMakeLists.txt \
       --replace-warn 'URI "org.kde.plasma.' 'URI "io.gitgud.wackyideas.plasma.' \

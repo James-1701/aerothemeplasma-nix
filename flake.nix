@@ -35,7 +35,7 @@
               hash = "sha256-jBTUgLpxhT/tVB5JTeAcxJ8zNyAK8gffGAiq3fOF1LE=";
             };
 
-            libplasma = self.callPackage ./pkgs/aerothemeplasma/hacks/libplasma.nix {};
+            libplasma = self.callPackage ./pkgs/aeroshell/hacks/libplasma.nix {};
             plasma-workspace = self.callPackage ./pkgs/aerothemeplasma/hacks/plasma-workspace.nix {};
 
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
