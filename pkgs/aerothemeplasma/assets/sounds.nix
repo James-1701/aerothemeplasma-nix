@@ -1,21 +1,24 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  fetchFromGitLab
 }:
 stdenvNoCC.mkDerivation {
   pname = "aerothemeplasma-sounds";
-  version = "2025-08-03";
-  src = aerothemeplasma;
+  version = "2026-01-29";
+  src = fetchFromGitLab {
+    domain = "gitgud.io";
+    owner = "aeroshell";
+    repo = "atp/aerothemeplasma-sounds";
+    rev = "4926188adcfed7ee699b53d3fb88e1996d67543d";
+    hash = "sha256-nGZtC0cC0hBWIX0zkwsdQ4klGhCy6KuEajvxtKH7Q0Q=";
+  };
 
-  unpackPhase = ''
-    runHook preUnpack
-    tar -xzf $src/misc/sounds/sounds.tar.gz
-    runHook postUnpack
-  '';
+  # not using upstream's CMakeLists here because.. it's just files
   installPhase = ''
     runHook preInstall
     mkdir -p $out/share/sounds
     cp -r Windows* $out/share/sounds
     runHook postInstall
   '';
+  dontFixup = true;
 }
