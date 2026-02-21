@@ -48,6 +48,13 @@
               rev = "1943d7c71fb3cc73e0c8a3a0b38ad28a8e8acf7e";
               hash = "sha256-rPgTyI6IBojd6vjDa8Vr2jBumD7NVAWrx1pDlbL2rEY=";
             };
+            aeroshell-workspace-repo = pkgs.fetchFromGitLab {
+              domain = "gitgud.io";
+              owner = "aeroshell";
+              repo = "aeroshell-workspace";
+              rev = "ceb31c1d4aac43955e0195c627a57bf45f511990";
+              hash = "sha256-nVuO+MioCku/isljfRQgEv2sRclOF/QdPBNPZs6Kd6M=";
+            };
 
             libplasma = self.callPackage ./pkgs/aeroshell/hacks/libplasma.nix {};
             plasma-workspace = self.callPackage ./pkgs/aeroshell/hacks/plasma-workspace.nix {};
@@ -65,13 +72,14 @@
             squashaero = self.callPackage ./pkgs/aeroshell/kwin/squashaero.nix {};
             thumbnail-aero = self.callPackage ./pkgs/aeroshell/kwin/thumbnail-aero.nix {};
 
+            kcmloader = self.callPackage ./pkgs/aeroshell/plasma/kcmloader.nix {};
+
             cursors = self.callPackage ./pkgs/aerothemeplasma/assets/cursors.nix {};
             icons = self.callPackage ./pkgs/aerothemeplasma/assets/icons.nix {};
             sounds = self.callPackage ./pkgs/aerothemeplasma/assets/sounds.nix {};
 
             authui7 = self.callPackage ./pkgs/aerothemeplasma/plasma/authui7.nix {};
             color-scheme = self.callPackage ./pkgs/aerothemeplasma/plasma/color-scheme.nix {};
-            kcmloader = self.callPackage ./pkgs/aerothemeplasma/plasma/kcmloader.nix {};
             kvantum-windows7aero = self.callPackage ./pkgs/aerothemeplasma/plasma/kvantum-windows7aero.nix {};
             layout-template = self.callPackage ./pkgs/aerothemeplasma/plasma/layout-template.nix {};
             seven-black = self.callPackage ./pkgs/aerothemeplasma/plasma/seven-black.nix {};

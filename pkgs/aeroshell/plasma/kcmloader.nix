@@ -1,16 +1,16 @@
 {
   stdenv,
-  aerothemeplasma,
+  aeroshell-workspace-repo,
   kdePackages,
   pkg-config,
   cmake
 }:
 stdenv.mkDerivation {
-  pname = "aerothemeplasma-kcmloader";
-  version = "2025-07-14";
-  src = aerothemeplasma;
+  pname = "aeroshell-kcmloader";
+  version = "2026-02-21";
+  src = aeroshell-workspace-repo;
 
-  preConfigure = "cd plasma/aerothemeplasma-kcmloader";
+  preConfigure = "cd aeroshell-kcmloader";
   buildInputs = with kdePackages; [ kcmutils ];
   nativeBuildInputs = [ cmake pkg-config kdePackages.wrapQtAppsHook ];
 }
