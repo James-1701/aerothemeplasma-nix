@@ -26,4 +26,6 @@
     plymouth.enable = true;
     sddm.enable = true;
   };
+  
+  programs.sevulet.enable = true;
 }

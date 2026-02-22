@@ -122,6 +122,11 @@
             aeroglasspane = self.callPackage ./pkgs/external/software/aeroglasspane.nix {};
             plymouthvista = self.callPackage ./pkgs/external/system/plymouthvista.nix {};
             linver = self.callPackage ./pkgs/external/software/linver.nix {};
+
+            sevulet-explorer = self.callPackage ./pkgs/external/software/sevulet/7sExplorer.nix {};
+            sevulet-notepad = self.callPackage ./pkgs/external/software/sevulet/7sNotepad.nix {};
+            sevulet-photoview = self.callPackage ./pkgs/external/software/sevulet/7sPhotoView.nix {};
+            sevulet-stickies = self.callPackage ./pkgs/external/software/sevulet/7sStickies.nix {};
           })
         );
       };

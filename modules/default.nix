@@ -13,6 +13,8 @@ in
     sddm.enable = lib.mkEnableOption "the SDDM theme";
   };
 
+  options.programs.sevulet.enable = lib.mkEnableOption "the Sevulet software suite";
+
   config = lib.mkIf cfg.enable {
     assertions = [{
       assertion = cfg.plymouth.enable -> cfg.fonts.enable;
@@ -44,7 +46,7 @@ in
 
       pkgs.kdePackages.qtstyleplugin-kvantum
       libplasma libtaskmanager libshowdesktop
-    ]);
+    ]) ++ lib.optionals config.programs.sevulet.enable [ atpkgs.sevulet-explorer atpkgs.sevulet-notepad atpkgs.sevulet-photoview atpkgs.sevulet-stickies ];
 
     boot.plymouth = lib.mkIf cfg.plymouth.enable {
       theme = "PlymouthVista";
