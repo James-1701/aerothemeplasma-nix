@@ -11,11 +11,17 @@
       systems = [ "x86_64-linux" "aarch64-linux" "i686-linux" ];
 
       flake.nixosModules.aerothemeplasma-nix = moduleWithSystem (
-        perSystem@{ config }: import ./modules/system.nix perSystem
+        perSystem@{ config }: import ./modules/default.nix perSystem
       );
-      flake.homeModules.aerothemeplasma-nix = moduleWithSystem (
-        perSystem@{ config }: import ./modules/home.nix perSystem
-      );
+      flake.homeModules.aerothemeplasma-nix = throw ''
+        aerothemeplasma-nix's home-manager module has been removed for Plasma 6.6, as the theme
+        now comes with an "Out of the Box Experience" program that can configure itself. It is stabler
+        than attempting to enable AeroThemePlasma through plasma-manager, which has a few odd quirks.
+
+        Please remove aerothemeplasma from home-manager and add aerothemeplasma.plasma.enable = true;
+        to your system configuration instead. You will see the Experience open on your next login. Note
+        that your plasma-manager settings could override settings set by the Experience if conflicting.
+      '';
 
       perSystem = { pkgs, system, ... }: {
         packages = pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) (
