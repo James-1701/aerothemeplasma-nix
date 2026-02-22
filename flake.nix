@@ -7,7 +7,7 @@
   };
 
   outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } ({ withSystem, moduleWithSystem, ... }: {
+    flake-parts.lib.mkFlake { inherit inputs; } ({ self, withSystem, moduleWithSystem, ... }: {
       systems = [ "x86_64-linux" "aarch64-linux" "i686-linux" ];
 
       flake.nixosModules.aerothemeplasma-nix = moduleWithSystem (
@@ -22,6 +22,15 @@
         to your system configuration instead. You will see the Experience open on your next login. Note
         that your plasma-manager settings could override settings set by the Experience if conflicting.
       '';
+
+      # This configuration is intended for testing,
+      # please do not try to switch to it!
+      flake.nixosConfigurations.atp = inputs.nixpkgs.lib.nixosSystem {
+        modules = [
+          self.nixosModules.aerothemeplasma-nix
+          ./vms/aerothemeplasma.nix
+        ];
+      };
 
       perSystem = { pkgs, system, ... }: {
         packages = pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) (
