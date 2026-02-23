@@ -35,7 +35,7 @@ in
     ] ++ (with atpkgs; lib.optionals cfg.plasma.enable [
       icons sounds
 
-      authui7 color-scheme kvantum-windows7aero
+      atpootb authui7 color-scheme kvantum-windows7aero
       layout-template seven-black
 
       keyboardlayout win7showdesktop
