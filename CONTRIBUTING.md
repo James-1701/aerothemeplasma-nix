@@ -13,9 +13,7 @@ A NixOS host is not required to contribute. Arch Linux instructions are also ava
 ### Arch Linux host
 Install the required packages: `sudo pacman -S --needed nix virt-viewer`
 
-Installing Nix creates a `/nix` folder. If you are the only user you can own it with `sudo chown -R $USER /nix`, otherwise you should enable the `nix-daemon` service to allow usage with multiple users.
-
-For [convenience](https://discourse.nixos.org/t/error-experimental-nix-feature-nix-command-is-disabled/18089), create `~/.config/nix/nix.conf` and enable a couple "experimental features" like so:
+Installing Nix creates a `/nix` folder, which is managed by the Nix daemon. Enable its service with `sudo systemctl enable --now nix-daemon`. Then, for [convenience](https://discourse.nixos.org/t/error-experimental-nix-feature-nix-command-is-disabled/18089), create `~/.config/nix/nix.conf` to enable a couple "experimental features" like so:
 ```
 extra-experimental-features = nix-command flakes
 ```
