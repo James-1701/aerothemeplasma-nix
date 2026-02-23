@@ -7,18 +7,27 @@
   makeFontsConf
 }:
 stdenvNoCC.mkDerivation {
-  pname = "aerothemeplasma-plymouthvista";
-  version = "2026-02-20";
+  pname = "plymouthvista";
+  version = "2026-02-22";
   src = fetchFromGitHub {
     owner = "furkrn";
     repo = "PlymouthVista";
-    rev = "b87f8c86cbf482b1414ebacb19e134e7c7b2d83a";
-    hash = "sha256-2Jpr2oE+BsndJ+vAZk5o2UawuDTrEsrRauqrq4jkCVo=";
+    rev = "cc6592a29387462d003c2c95cb9cb5df3fea851f";
+    hash = "sha256-14wLKz9CL+ZwcgT8x8BXDs105dORl9CL4ITvjWx1gRI=";
   };
 
+  env = {
+    # https://discourse.nixos.org/t/fontconfig-error-no-writable-cache-directories/34447/2
+    XDG_CACHE_HOME = "$(mktemp -d)";
+    # https://discourse.nixos.org/t/imagemagicks-convert-command-fails-due-to-fontconfig-error/20518/5
+    FONTCONFIG_FILE = makeFontsConf {
+      fontDirectories = [ segoe-ui ];
+    };
+  };
+  nativeBuildInputs = [ imagemagick ];
   buildPhase = ''
     runHook preBuild
-    patchShebangs ./compile.sh ./pv_conf.sh
+    patchShebangs ./compile.sh ./pv_conf.sh ./gen_blur.sh
 
     ./compile.sh
 
@@ -29,6 +38,8 @@ stdenvNoCC.mkDerivation {
     ./pv_conf.sh -s UseLegacyBootScreen -v 0
     ./pv_conf.sh -s UseShadow -v 1
     ./pv_conf.sh -s AuthuiStyle -v 7
+
+    ./gen_blur.sh
 
     substituteInPlace PlymouthVista.plymouth \
       --replace-fail "/usr/share" "$out/share"
