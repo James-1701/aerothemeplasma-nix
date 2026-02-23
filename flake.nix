@@ -109,6 +109,7 @@
             seven-black = self.callPackage ./pkgs/aerothemeplasma/plasma/seven-black.nix {};
             shell = self.callPackage ./pkgs/aerothemeplasma/plasma/shell.nix {};
 
+            battery = self.callPackage ./pkgs/aerothemeplasma/plasmoids/battery.nix {};
             desktopcontainment = self.callPackage ./pkgs/aerothemeplasma/plasmoids/desktopcontainment.nix {};
             digitalclocklite = self.callPackage ./pkgs/aerothemeplasma/plasmoids/digitalclocklite.nix {};
             keyboardlayout = self.callPackage ./pkgs/aerothemeplasma/plasmoids/keyboardlayout.nix {};

@@ -45,7 +45,7 @@ in
       digitalclocklite panel thumbnail-aero
       fadingpopupsaero squashaero loginaero
       dimscreenaero launchfeedback smodsnap
-      aeroglide kcmloader
+      aeroglide kcmloader battery
 
       pkgs.kdePackages.qtstyleplugin-kvantum
       libplasma libtaskmanager libshowdesktop
