@@ -9,10 +9,9 @@
 }:
 stdenv.mkDerivation {
   pname = "aeroshell-smod";
-  version = "2026-02-20";
+  version = "2026-02-23";
   src = aeroshell-smod-repo;
 
-  patches = [ ../../../patches/smod-xdg.patch ];
   buildInputs = with kdePackages; [
     extra-cmake-modules qtbase kirigami
     kcoreaddons kcolorscheme kguiaddons
