@@ -1,14 +1,14 @@
 {
   stdenv,
-  aerothemeplasma,
+  aerothemeplasma-repo,
   kdePackages,
   libplasma,
   cmake
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-sevenstart";
-  version = "2026-01-04";
-  src = aerothemeplasma;
+  version = "2026-02-21";
+  src = aerothemeplasma-repo;
 
   preConfigure = ''
     cd plasma/plasmoids/src/sevenstart_src
