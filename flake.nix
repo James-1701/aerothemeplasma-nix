@@ -35,12 +35,19 @@
       perSystem = { pkgs, system, ... }: {
         packages = pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) (
           pkgs.lib.makeScope pkgs.newScope (self: {
-            aerothemeplasma = pkgs.fetchFromGitLab {
+            aerothemeplasma = pkgs.fetchFromGitLab { # TODO: remove when all pkgs are using aerothemeplasma-repo
               domain = "gitgud.io";
               owner = "wackyideas";
               repo = "AeroThemePlasma";
               rev = "d572194634735a6a727dc71cc4cf1aaf3ca8ce7a";
               hash = "sha256-pET+c0gYO9crdIEoQ/ABLkC7Qd9XJ6D1toonglS+xlE=";
+            };
+            aerothemeplasma-repo = pkgs.fetchFromGitLab {
+              domain = "gitgud.io";
+              owner = "aeroshell";
+              repo = "atp/aerothemeplasma";
+              rev = "d0a04e9be94a47dbe600a90b15d56424badadc41";
+              hash = "sha256-zL3wH7EzGgv92hmgIEygWGbqvAPkbu4BCAumfKQ2WPo";
             };
             aerothemeplasma-icons-repo = pkgs.fetchFromGitLab {
               domain = "gitgud.io";
