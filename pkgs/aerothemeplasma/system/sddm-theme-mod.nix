@@ -1,11 +1,11 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  aerothemeplasma-repo
 }:
 stdenvNoCC.mkDerivation {
   pname = "aerothemeplasma-sddm-theme-mod";
   version = "2025-10-04";
-  src = aerothemeplasma;
+  src = aerothemeplasma-repo;
 
   dontUnpack = true;
   installPhase = ''
