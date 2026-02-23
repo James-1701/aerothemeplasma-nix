@@ -1,11 +1,11 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  aerothemeplasma-repo
 }:
 stdenvNoCC.mkDerivation {
   pname = "aerothemeplasma-win7showdesktop";
-  version = "2025-06-21";
-  src = aerothemeplasma;
+  version = "2026-02-21";
+  src = aerothemeplasma-repo;
 
   dontUnpack = true;
   installPhase = ''
