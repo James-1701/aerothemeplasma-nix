@@ -1,14 +1,14 @@
 {
   stdenv,
-  aerothemeplasma,
+  aerothemeplasma-repo,
   kdePackages,
   pkg-config,
   cmake
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-notifications";
-  version = "2026-02-03";
-  src = aerothemeplasma;
+  version = "2026-02-21";
+  src = aerothemeplasma-repo;
 
   preConfigure = "cd plasma/plasmoids/src/notifications_src";
   buildInputs = with kdePackages; [
