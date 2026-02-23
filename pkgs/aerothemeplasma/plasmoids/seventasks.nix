@@ -1,14 +1,14 @@
 {
   stdenv,
-  aerothemeplasma,
+  aerothemeplasma-repo,
   kdePackages,
   libplasma,
   cmake
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-seventasks";
-  version = "2026-02-03";
-  src = aerothemeplasma;
+  version = "2026-02-21";
+  src = aerothemeplasma-repo;
 
   preConfigure = "cd plasma/plasmoids/src/seventasks_src";
   buildInputs = [ libplasma ];
