@@ -9,7 +9,7 @@
 }:
 stdenv.mkDerivation {
   pname = "aeroshell-smodsnap";
-  version = "2026-02-21";
+  version = "2026-02-23";
   src = aeroshell-kwin-repo;
 
   preConfigure = "cd effects_cpp/wayland/kwin-effect-smodsnap-v2";
