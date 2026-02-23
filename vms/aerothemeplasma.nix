@@ -4,7 +4,7 @@
   virtualisation.vmVariant.virtualisation = {
     memorySize = 4096;
     cores = 4;
-    qemu.options = ["-device virtio-vga-gl" "-display spice-app,gl=on"];
+    qemu.options = ["-device virtio-vga-gl" "-device virtio-sound" "-display spice-app,gl=on"];
   };
   users.users.anon = {
     isNormalUser = true;
