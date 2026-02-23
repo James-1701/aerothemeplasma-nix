@@ -1,14 +1,14 @@
 {
   stdenv,
-  aerothemeplasma,
+  aerothemeplasma-repo,
   kdePackages,
   pkg-config,
   cmake
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-volume";
-  version = "2025-07-05";
-  src = aerothemeplasma;
+  version = "2026-02-21";
+  src = aerothemeplasma-repo;
 
   preConfigure = "cd plasma/plasmoids/src/volume_src";
   buildInputs = [ kdePackages.libplasma ];
