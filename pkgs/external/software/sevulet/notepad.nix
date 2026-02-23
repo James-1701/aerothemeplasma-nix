@@ -1,12 +1,11 @@
 {
   stdenv,
-  lib,
   fetchFromGitLab,
   qt6
 }:
 stdenv.mkDerivation {
-  pname = "7sNotepad";
-  version = "7733e2f9";
+  pname = "7s-notepad";
+  version = "2026-01-22";
 
   src = fetchFromGitLab {
     domain = "gitgud.io";
@@ -35,4 +34,8 @@ stdenv.mkDerivation {
     cp -f ./notepad $out/bin
     runHook postInstall
   '';
+
+  meta = {
+    mainProgram = "notepad";
+  };
 }

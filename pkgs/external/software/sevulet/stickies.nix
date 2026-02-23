@@ -1,12 +1,11 @@
 {
   stdenv,
-  lib,
   fetchFromGitLab,
   qt6
 }:
 stdenv.mkDerivation {
-  pname = "7sStickies";
-  version = "f1ed6d0f";
+  pname = "7s-stickies";
+  version = "2025-11-09";
 
   src = fetchFromGitLab {
     domain = "gitgud.io";
@@ -35,4 +34,8 @@ stdenv.mkDerivation {
     cp -f ./stickies $out/bin
     runHook postInstall
   '';
+  
+  meta = {
+    mainProgram = "stickies";
+  };
 }

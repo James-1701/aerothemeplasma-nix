@@ -1,13 +1,12 @@
 {
   stdenv,
-  lib,
   fetchFromGitLab,
-  qt6,
-  kdePackages
+  kdePackages,
+  qt6
 }:
 stdenv.mkDerivation {
-  pname = "7sExplorer";
-  version = "19191afb";
+  pname = "7s-explorer";
+  version = "2026-01-03";
 
   src = fetchFromGitLab {
     domain = "gitgud.io";
@@ -17,17 +16,20 @@ stdenv.mkDerivation {
     sha256 = "sha256-1hIHZuBBcoAovRoQXeQ53VCEaUEXxQRYxKK9Pm+L2HE=";
   };
 
-  buildInputs = [ qt6.qtbase qt6.qtmultimedia kdePackages.kwindowsystem kdePackages.kservice kdePackages.kio kdePackages.kcoreaddons ];
+  buildInputs = with kdePackages; [ 
+    qt6.qtbase qt6.qtmultimedia 
+    kwindowsystem kservice kio kcoreaddons 
+  ];
   nativeBuildInputs = [ qt6.wrapQtAppsHook qt6.qmake ];
 
   # Snaillatte hardcoded all the paths and it breaks compilation on nixos. This fixes it
-  qmakeFlags = [
+  qmakeFlags = with kdePackages; [
     "explorer.pro"
-    "INCLUDEPATH+=${kdePackages.kwindowsystem.dev}/include/KF6/KWindowSystem"
-    "INCLUDEPATH+=${kdePackages.kservice.dev}/include/KF6/KService"
-    "INCLUDEPATH+=${kdePackages.kio.dev}/include/KF6/KIO"
-    "INCLUDEPATH+=${kdePackages.kio.dev}/include/KF6/KIOCore"
-    "INCLUDEPATH+=${kdePackages.kcoreaddons.dev}/include/KF6/KCoreAddons"
+    "INCLUDEPATH+=${kwindowsystem.dev}/include/KF6/KWindowSystem"
+    "INCLUDEPATH+=${kservice.dev}/include/KF6/KService"
+    "INCLUDEPATH+=${kio.dev}/include/KF6/KIO"
+    "INCLUDEPATH+=${kio.dev}/include/KF6/KIOCore"
+    "INCLUDEPATH+=${kcoreaddons.dev}/include/KF6/KCoreAddons"
   ];
 
   installPhase = ''
@@ -42,4 +44,8 @@ stdenv.mkDerivation {
     cp -f ./explorer $out/bin
     runHook postInstall
   '';
+
+  meta = {
+    mainProgram = "explorer";
+  };
 }

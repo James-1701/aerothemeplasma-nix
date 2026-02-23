@@ -18,13 +18,9 @@ stdenv.mkDerivation {
   };
 
   buildInputs = [ qt6.qtbase ];
-  nativeBuildInputs = [ qt6.wrapQtAppsHook ];
+  nativeBuildInputs = [ qt6.wrapQtAppsHook qt6.qmake ];
+  qmakeFlags = [ "linver.pro" ];
 
   postPatch = "substituteInPlace linver.pro --replace-fail 'target.path = /usr/bin' \"target.path = $out/bin\"";
-  configurePhase = ''
-    runHook preConfigure
-    qmake6 linver.pro
-    runHook postConfigure
-  '';
   qtWrapperArgs = [ "--prefix PATH : ${lib.makeBinPath [lsb-release]}" ];
 }

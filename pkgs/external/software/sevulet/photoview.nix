@@ -1,13 +1,12 @@
 {
   stdenv,
-  lib,
   fetchFromGitLab,
-  qt6,
-  kdePackages
+  kdePackages,
+  qt6
 }:
 stdenv.mkDerivation {
-  pname = "7sPhotoView";
-  version = "bf1082eb";
+  pname = "7s-photoview";
+  version = "2025-11-22";
 
   src = fetchFromGitLab {
     domain = "gitgud.io";
@@ -37,4 +36,8 @@ stdenv.mkDerivation {
     cp -f ./photoview $out/bin
     runHook postInstall
   '';
+
+  meta = {
+    mainProgram = "photoview";
+  };
 }

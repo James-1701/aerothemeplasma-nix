@@ -130,10 +130,10 @@
             plymouthvista = self.callPackage ./pkgs/external/system/plymouthvista.nix {};
             linver = self.callPackage ./pkgs/external/software/linver.nix {};
 
-            sevulet-explorer = self.callPackage ./pkgs/external/software/sevulet/7sExplorer.nix {};
-            sevulet-notepad = self.callPackage ./pkgs/external/software/sevulet/7sNotepad.nix {};
-            sevulet-photoview = self.callPackage ./pkgs/external/software/sevulet/7sPhotoView.nix {};
-            sevulet-stickies = self.callPackage ./pkgs/external/software/sevulet/7sStickies.nix {};
+            sevulet-explorer = self.callPackage ./pkgs/external/software/sevulet/explorer.nix {};
+            sevulet-notepad = self.callPackage ./pkgs/external/software/sevulet/notepad.nix {};
+            sevulet-photoview = self.callPackage ./pkgs/external/software/sevulet/photoview.nix {};
+            sevulet-stickies = self.callPackage ./pkgs/external/software/sevulet/stickies.nix {};
           })
         );
       };
