@@ -1,13 +1,13 @@
 {
   stdenv,
-  aerothemeplasma,
+  aerothemeplasma-repo,
   kdePackages,
   cmake
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-desktopcontainment";
-  version = "2026-02-03";
-  src = aerothemeplasma;
+  version = "2026-02-21";
+  src = aerothemeplasma-repo;
 
   preConfigure = ''
     cd plasma/plasmoids/src/desktopcontainment
