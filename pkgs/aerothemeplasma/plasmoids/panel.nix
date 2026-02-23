@@ -1,11 +1,11 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  aerothemeplasma-repo
 }:
 stdenvNoCC.mkDerivation {
   pname = "aerothemeplasma-panel";
   version = "2025-10-21";
-  src = aerothemeplasma;
+  src = aerothemeplasma-repo;
 
   dontUnpack = true;
   installPhase = ''
