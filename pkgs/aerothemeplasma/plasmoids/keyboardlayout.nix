@@ -1,11 +1,11 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  aerothemeplasma-repo
 }:
 stdenvNoCC.mkDerivation {
   pname = "aerothemeplasma-keyboardlayout";
   version = "2025-01-24";
-  src = aerothemeplasma;
+  src = aerothemeplasma-repo;
 
   dontUnpack = true;
   installPhase = ''
