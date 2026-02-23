@@ -1,14 +1,14 @@
 {
   stdenv,
-  aerothemeplasma,
+  aerothemeplasma-repo,
   kdePackages,
   pkg-config,
   cmake
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-systemtray";
-  version = "2025-07-05";
-  src = aerothemeplasma;
+  version = "2025-10-05";
+  src = aerothemeplasma-repo;
 
   preConfigure = ''
     cd plasma/plasmoids/src/systemtray_src
