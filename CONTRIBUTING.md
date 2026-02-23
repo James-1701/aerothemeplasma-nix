@@ -1,0 +1,47 @@
+Hello! Some familiarity with Git is assumed, so instead this will be about using Nix to run a virtual machine off this repository. This is very useful when testing changes, as the packages don't apply to your host system, so you can easily bail if something broke.
+
+A NixOS host is not required to contribute. Arch Linux instructions are also available, albeit with a large download as Nix will get its own packages instead of using `pacman`.
+
+## Requirements
+* Nix package manager or NixOS
+* If not on NixOS, up to ~4GB download and ~12GB of storage space
+* 4 CPU cores and 4096MB RAM for the VM, which [can be edited](vms/aerothemeplasma.nix)
+* [Font files](README.md#fonts) from an [up-to-date](https://github.com/nyakase/aerothemeplasma-nix/issues/15#issuecomment-3941785456) Windows® 7 install if testing Plymouth
+* x86-64 host capable of [mesa hardware acceleration](https://docs.mesa3d.org/faq.html#rendering-is-slow-why-isn-t-my-graphics-hardware-being-used)
+* virt-viewer as the [SPICE](https://spice-space.org) client
+
+### Arch Linux host
+Install the required packages: `sudo pacman -S --needed nix virt-viewer`
+
+Installing Nix creates a `/nix` folder. If you are the only user you can own it with `sudo chown -R $USER /nix`, otherwise you should enable the `nix-daemon` service to allow usage with multiple users.
+
+For [convenience](https://discourse.nixos.org/t/error-experimental-nix-feature-nix-command-is-disabled/18089), create `~/.config/nix/nix.conf` and enable a couple "experimental features" like so:
+```
+extra-experimental-features = nix-command flakes
+```
+
+### NixOS host
+Your NixOS configuration should have these options:
+```nix
+{pkgs, ...}:
+{
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  environment.systemPackages = with pkgs; [ virt-viewer ];
+}
+```
+
+## Get fonts
+If testing with the Plymouth theme, it needs fonts extracted from an [up-to-date](https://github.com/nyakase/aerothemeplasma-nix/issues/15#issuecomment-3941785456) Windows® 7 install to build. Alternatively, you can disable it in [the VM's configuration](vms/aerothemeplasma.nix) by setting "fonts.enable" and "plymouth.enable" to `false`. See [the README](README.md#fonts) for the expected font files and how to add them to `/nix/store`.
+
+## Build and run
+The command to run the VM differs depending on the host distro. Run one of these in the project folder:
+```
+# on NixOS
+nix run .#nixosConfigurations.atp.config.system.build.vm
+# not on NixOS
+nix run --impure github:nix-community/nixGL -- nix run .#nixosConfigurations.atp.config.system.build.vm
+```
+
+Nix will prepare some packages in `/nix/store`, so your first time will take a while. Future builds will reuse the existing packages, and editing files will rebuild only the relevant packages. To get rid of the packages, use `nix-collect-garbage`, *but you will have to prepare them again the next time.*
+
+When the VM is ready, virt-viewer will automatically open. The password for the account is `anon`. To test new changes, just close the VM and run it again. Running the VM creates a `nixos.qcow2` disk file in the folder, which can safely be deleted when testing fresh installs.
