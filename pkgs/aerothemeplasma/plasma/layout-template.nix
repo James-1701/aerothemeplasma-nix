@@ -1,11 +1,11 @@
 {
   stdenvNoCC,
-  aerothemeplasma
+  aerothemeplasma-repo
 }:
 stdenvNoCC.mkDerivation {
   pname = "aerothemeplasma-layout-template";
   version = "2025-10-24";
-  src = aerothemeplasma;
+  src = aerothemeplasma-repo;
 
   dontUnpack = true;
   installPhase = ''
