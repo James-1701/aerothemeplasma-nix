@@ -2,7 +2,6 @@
   stdenv,
   lib,
   aerothemeplasma,
-  plasma-workspace,
   kdePackages,
   cmake
 }:
@@ -16,8 +15,8 @@ stdenv.mkDerivation {
   preConfigure = "cd plasma/sddm/login-sessions";
   postFixup = ''
     substituteInPlace $out/bin/startatp-wayland \
-      --replace-fail "$out/libexec/plasma-dbus-run-session-if-needed" "${plasma-workspace}/libexec/atplasma-dbus-run-session-if-needed" \
-      --replace-fail "$out/bin/startplasma-wayland" "${plasma-workspace}/bin/startatplasma-wayland"
+      --replace-fail "$out/libexec/plasma-dbus-run-session-if-needed" "${kdePackages.plasma-workspace}/libexec/plasma-dbus-run-session-if-needed" \
+      --replace-fail "$out/bin/startplasma-wayland" "${kdePackages.plasma-workspace}/bin/startplasma-wayland"
 
     # other packages are being built for wayland only,
     # so it's misleading to provide an x11 session
