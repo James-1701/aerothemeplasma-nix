@@ -4,7 +4,7 @@ A NixOS host is not required to contribute. Arch Linux instructions are also ava
 
 ## Requirements
 * Nix package manager or NixOS
-* If not on NixOS, up to ~4GB download and ~12GB of storage space
+* Up to ~4GB download and ~12GB of storage space (mostly skipped on NixOS)
 * 4 CPU cores and 4096MB RAM for the VM, which [can be edited](vms/aerothemeplasma.nix)
 * [Font files](README.md#fonts) from an [up-to-date](https://github.com/nyakase/aerothemeplasma-nix/issues/15#issuecomment-3941785456) Windows® 7 install if testing Plymouth
 * x86-64 host capable of [mesa hardware acceleration](https://docs.mesa3d.org/faq.html#rendering-is-slow-why-isn-t-my-graphics-hardware-being-used)
@@ -40,6 +40,8 @@ nix run .#nixosConfigurations.atp.config.system.build.vm
 nix run --impure github:nix-community/nixGL -- nix run .#nixosConfigurations.atp.config.system.build.vm
 ```
 
-Nix will prepare some packages in `/nix/store`, so your first time will take a while. Future builds will reuse the existing packages, and editing files will rebuild only the relevant packages. To get rid of the packages, use `nix-collect-garbage`, *but you will have to prepare them again the next time.*
+Nix will prepare some packages in `/nix/store`, so your first time will take a while. Future builds will reuse the existing packages, and editing packages will rebuild only them and their dependents. When the VM is ready, virt-viewer will automatically open (the password is `anon`).
 
-When the VM is ready, virt-viewer will automatically open. The password for the account is `anon`. To test new changes, just close the VM and run it again. Running the VM creates a `nixos.qcow2` disk file in the folder, which can safely be deleted when testing fresh installs.
+To test new changes, just close the VM and run it again. To delete the user files in the VM, e.g. if re-testing AeroThemePlasma's setup wizard, delete the `nixos.qcow2` disk image in the project folder.
+
+Once you are finished and want to delete the prepared packages you can use `nix store gc -v`, which keeps `/nix/store` assets used in places like your own NixOS system, but gets rid of the rest.
