@@ -10,6 +10,7 @@ in
     plasma.enable = lib.mkEnableOption "the AeroThemePlasma theme packages";
     fonts.enable = lib.mkEnableOption "the Segoe UI and Lucida Console fonts";
     plymouth.enable = lib.mkEnableOption "the PlymouthVista theme";
+    polkit.enable = lib.mkEnableOption "the Polkit agent replacement";
     sddm.enable = lib.mkEnableOption "the SDDM theme";
   };
 
@@ -56,6 +57,10 @@ in
       theme = "PlymouthVista";
       themePackages = [ atpkgs.plymouthvista ];
     };
+
+    systemd.packages = with atpkgs; lib.optionals cfg.polkit.enable [
+      uac-polkit-agent
+    ];
 
     services.displayManager.sddm = lib.mkIf cfg.sddm.enable {
       theme = "${atpkgs.sddm-theme-mod}/share/sddm/themes/sddm-theme-mod";
