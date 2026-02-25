@@ -46,8 +46,8 @@
               domain = "gitgud.io";
               owner = "aeroshell";
               repo = "atp/aerothemeplasma";
-              rev = "d0a04e9be94a47dbe600a90b15d56424badadc41";
-              hash = "sha256-zL3wH7EzGgv92hmgIEygWGbqvAPkbu4BCAumfKQ2WPo";
+              rev = "c7e74773709e9d03a04e15d143867f4a89d849f4";
+              hash = "sha256-qzgTgPB7bbI25fjmWlqSHFFDpFJKcqBpqOCWLyUANyk=";
             };
             aerothemeplasma-icons-repo = pkgs.fetchFromGitLab {
               domain = "gitgud.io";
@@ -77,7 +77,7 @@
               rev = "ceb31c1d4aac43955e0195c627a57bf45f511990";
               hash = "sha256-nVuO+MioCku/isljfRQgEv2sRclOF/QdPBNPZs6Kd6M=";
             };
-
+            
             libplasma = self.callPackage ./pkgs/aeroshell/hacks/libplasma.nix {};
             plasma-workspace = self.callPackage ./pkgs/aeroshell/hacks/plasma-workspace.nix {};
 
