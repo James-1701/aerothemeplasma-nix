@@ -35,27 +35,6 @@
       perSystem = { pkgs, system, ... }: {
         packages = pkgs.lib.filterAttrs (_: pkgs.lib.isDerivation) (
           pkgs.lib.makeScope pkgs.newScope (self: {
-            aerothemeplasma = pkgs.fetchFromGitLab { # TODO: remove when all pkgs are using aerothemeplasma-repo
-              domain = "gitgud.io";
-              owner = "wackyideas";
-              repo = "AeroThemePlasma";
-              rev = "d572194634735a6a727dc71cc4cf1aaf3ca8ce7a";
-              hash = "sha256-pET+c0gYO9crdIEoQ/ABLkC7Qd9XJ6D1toonglS+xlE=";
-            };
-            aerothemeplasma-repo = pkgs.fetchFromGitLab {
-              domain = "gitgud.io";
-              owner = "aeroshell";
-              repo = "atp/aerothemeplasma";
-              rev = "c7e74773709e9d03a04e15d143867f4a89d849f4";
-              hash = "sha256-qzgTgPB7bbI25fjmWlqSHFFDpFJKcqBpqOCWLyUANyk=";
-            };
-            aerothemeplasma-icons-repo = pkgs.fetchFromGitLab {
-              domain = "gitgud.io";
-              owner = "aeroshell";
-              repo = "atp/aerothemeplasma-icons";
-              rev = "44dbe78b76c8b0d55343428b6b179716c36fd7f6";
-              hash = "sha256-jBTUgLpxhT/tVB5JTeAcxJ8zNyAK8gffGAiq3fOF1LE=";
-            };
             aeroshell-kwin-repo = pkgs.fetchFromGitLab {
               domain = "gitgud.io";
               owner = "aeroshell";
@@ -76,6 +55,20 @@
               repo = "aeroshell-workspace";
               rev = "ceb31c1d4aac43955e0195c627a57bf45f511990";
               hash = "sha256-nVuO+MioCku/isljfRQgEv2sRclOF/QdPBNPZs6Kd6M=";
+            };
+            aerothemeplasma-icons-repo = pkgs.fetchFromGitLab {
+              domain = "gitgud.io";
+              owner = "aeroshell";
+              repo = "atp/aerothemeplasma-icons";
+              rev = "44dbe78b76c8b0d55343428b6b179716c36fd7f6";
+              hash = "sha256-jBTUgLpxhT/tVB5JTeAcxJ8zNyAK8gffGAiq3fOF1LE=";
+            };
+            aerothemeplasma-repo = pkgs.fetchFromGitLab {
+              domain = "gitgud.io";
+              owner = "aeroshell";
+              repo = "atp/aerothemeplasma";
+              rev = "c7e74773709e9d03a04e15d143867f4a89d849f4";
+              hash = "sha256-qzgTgPB7bbI25fjmWlqSHFFDpFJKcqBpqOCWLyUANyk=";
             };
             
             libplasma = self.callPackage ./pkgs/aeroshell/hacks/libplasma.nix {};
