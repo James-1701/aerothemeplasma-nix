@@ -11,6 +11,7 @@
     extraGroups = [ "wheel" ];
     password = "anon";
   };
+  time.timeZone = "Europe/Oslo";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
