@@ -71,6 +71,7 @@ in
       fadingpopupsaero squashaero loginaero
       dimscreenaero launchfeedback smodsnap
       aeroglide kcmloader battery
+      networkmanagement
 
       pkgs.kdePackages.qtstyleplugin-kvantum
     ]) ++ (with atpkgs; lib.optionals config.programs.sevulet.enable [ 

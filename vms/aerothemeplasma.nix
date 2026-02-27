@@ -12,6 +12,7 @@
     password = "anon";
   };
   time.timeZone = "Europe/Oslo";
+  networking.networkmanager.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

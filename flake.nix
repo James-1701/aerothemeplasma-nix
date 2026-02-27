@@ -115,6 +115,7 @@
             desktopcontainment = self.callPackage ./pkgs/aerothemeplasma/plasmoids/desktopcontainment.nix {};
             digitalclocklite = self.callPackage ./pkgs/aerothemeplasma/plasmoids/digitalclocklite.nix {};
             keyboardlayout = self.callPackage ./pkgs/aerothemeplasma/plasmoids/keyboardlayout.nix {};
+            networkmanagement = self.callPackage ./pkgs/aerothemeplasma/plasmoids/networkmanagement.nix {};
             notifications = self.callPackage ./pkgs/aerothemeplasma/plasmoids/notifications.nix {};
             panel = self.callPackage ./pkgs/aerothemeplasma/plasmoids/panel.nix {};
             sevenstart = self.callPackage ./pkgs/aerothemeplasma/plasmoids/sevenstart.nix {};
