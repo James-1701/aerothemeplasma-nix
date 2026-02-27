@@ -20,13 +20,15 @@
   services.desktopManager.plasma6.enable = true;
   services.displayManager.defaultSession = "aerothemeplasma";
 
-  aerothemeplasma = {
+  programs.aeroshell = {
     enable = true;
-    plasma.enable = true;
     fonts.enable = true;
-    plymouth.enable = true;
-    sddm.enable = true;
     polkit.enable = true;
+    aerothemeplasma = {
+      enable = true;
+      sddm.enable = true;
+      plymouth.enable = true;
+    };
   };
   programs = {
     sevulet.enable = true;

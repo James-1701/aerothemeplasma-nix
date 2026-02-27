@@ -15,12 +15,12 @@
       );
       flake.homeModules.aerothemeplasma-nix = throw ''
         aerothemeplasma-nix's home-manager module has been removed for Plasma 6.6, as the theme
-        now comes with an "Out of the Box Experience" program that can configure itself. It is stabler
+        now comes with an "Out of the Box Experience" wizard that can configure itself. It is stabler
         than attempting to enable AeroThemePlasma through plasma-manager, which has a few odd quirks.
 
-        Please remove aerothemeplasma from home-manager and add aerothemeplasma.plasma.enable = true;
-        to your system configuration instead. You will see the Experience open on your next login. Note
-        that your plasma-manager settings could override settings set by the Experience if conflicting.
+        Please remove aerothemeplasma from home-manager and read the README's configuration section again:
+        https://github.com/nyakase/aerothemeplasma-nix#configuration. You will see the wizard open on your 
+        next login. Note that plasma-manager settings could override the wizard's settings if conflicting. 
       '';
 
       # This configuration is intended for testing,

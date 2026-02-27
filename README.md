@@ -5,7 +5,7 @@ This [flake](https://wiki.nixos.org/wiki/Flakes) can be used to install the Wayl
 
 ## Installation
 ### Fonts
-Skip this section if you don't want to use `aerothemeplasma.fonts.enable` (required for the Plymouth theme).
+Skip this section if you don't want to use `programs.aeroshell.fonts.enable` (required for the Plymouth theme).
 
 Please get some font files from an up-to-date install of Windows 7. To check the version of a font with fontconfig, use `fc-query -f "%{fontversion}" FILE.ttf`. The expected files from C:\Windows\Fonts are as follows:
 
@@ -54,13 +54,15 @@ services.displayManager.sddm.enable = true;
 services.desktopManager.plasma6.enable = true;
 services.displayManager.defaultSession = "aerothemeplasma"; # if you want
 
-aerothemeplasma = {
+programs.aeroshell = {
   enable = true;
-  plasma.enable = true;
   fonts.enable = true;
-  plymouth.enable = true;
-  sddm.enable = true;
   polkit.enable = true;
+  aerothemeplasma = {
+    enable = true;
+    sddm.enable = true;
+    plymouth.enable = true;
+  };
 };
 ```
 
