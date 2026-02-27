@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-volume";
-  version = "2026-02-21";
+  version = "2026-02-27";
   src = aerothemeplasma-repo;
 
   preConfigure = "cd plasma/plasmoids/src/volume_src";

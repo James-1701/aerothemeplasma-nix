@@ -6,7 +6,7 @@
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-atpootb";
-  version = "2026-02-25";
+  version = "2026-02-27";
   src = aerothemeplasma-repo;
 
   preConfigure = "cd plasma/atpootb";
