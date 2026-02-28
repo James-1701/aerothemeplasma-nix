@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-systemtray";
-  version = "2025-10-05";
+  version = "2026-02-28";
   src = aerothemeplasma-repo;
 
   preConfigure = ''
@@ -19,7 +19,6 @@ stdenv.mkDerivation {
   buildInputs = with kdePackages; [
     libplasma qtwayland knotifyconfig
     kitemmodels kstatusnotifieritem
-    plasma5support
   ];
   nativeBuildInputs = [ cmake pkg-config kdePackages.wrapQtAppsHook ];
 }
