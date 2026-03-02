@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-sevenstart";
-  version = "2026-02-21";
+  version = "2026-03-02";
   src = aerothemeplasma-repo;
 
   preConfigure = ''

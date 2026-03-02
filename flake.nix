@@ -67,8 +67,8 @@
               domain = "gitgud.io";
               owner = "aeroshell";
               repo = "atp/aerothemeplasma";
-              rev = "138762cb18273635ecd3f2fdfb250b2df26abb17";
-              hash = "sha256-7y/M+kogj+Wx1tfb1WG7uGGgvNb4s9UvvBrhQpz2jYo=";
+              rev = "4ec0d07d8d4646a94eb72a0df7a9cbc4a39b0cb9";
+              hash = "sha256-aBz1/l742LB6sMtM14wy4SV8AgxOMQABnegTlIWAuK0=";
             };
             aeroshell-uac-repo = pkgs.fetchFromGitLab {
               domain = "gitgud.io";

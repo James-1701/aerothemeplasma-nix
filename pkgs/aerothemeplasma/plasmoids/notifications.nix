@@ -7,7 +7,7 @@
 }:
 stdenv.mkDerivation {
   pname = "aerothemeplasma-notifications";
-  version = "2026-02-28";
+  version = "2026-03-02";
   src = aerothemeplasma-repo;
 
   preConfigure = "cd plasma/plasmoids/src/notifications_src";
