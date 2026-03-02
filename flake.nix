@@ -133,13 +133,15 @@
             lucida-console = self.callPackage ./pkgs/external/fonts/lucida-console.nix {};
 
             aeroglasspane = self.callPackage ./pkgs/external/software/aeroglasspane.nix {};
-            plymouthvista = self.callPackage ./pkgs/external/system/plymouthvista.nix {};
+            execbin = self.callPackage ./pkgs/external/software/execbin.nix {};
             linver = self.callPackage ./pkgs/external/software/linver.nix {};
 
             sevulet-explorer = self.callPackage ./pkgs/external/software/sevulet/explorer.nix {};
             sevulet-notepad = self.callPackage ./pkgs/external/software/sevulet/notepad.nix {};
             sevulet-photoview = self.callPackage ./pkgs/external/software/sevulet/photoview.nix {};
             sevulet-stickies = self.callPackage ./pkgs/external/software/sevulet/stickies.nix {};
+
+            plymouthvista = self.callPackage ./pkgs/external/system/plymouthvista.nix {};
           })
         );
       };

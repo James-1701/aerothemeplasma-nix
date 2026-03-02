@@ -34,5 +34,6 @@
   programs = {
     sevulet.enable = true;
     linver.enable = true;
+    execbin.enable = true;
   };
 }

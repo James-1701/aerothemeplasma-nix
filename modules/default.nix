@@ -31,6 +31,7 @@ in
 
     sevulet.enable = lib.mkEnableOption "the Sevulet software suite";
     linver.enable = lib.mkEnableOption "the Linver application";
+    execbin.enable = lib.mkEnableOption "the ExecBin application";
   };
 
   config = lib.mkIf (config.aerothemeplasma.enable || cfg.enable) {
@@ -77,7 +78,8 @@ in
     ]) ++ (with atpkgs; lib.optionals config.programs.sevulet.enable [ 
       sevulet-explorer sevulet-notepad 
       sevulet-photoview sevulet-stickies 
-    ]) ++ lib.optionals config.programs.linver.enable [ atpkgs.linver ];
+    ]) ++ lib.optionals config.programs.linver.enable [ atpkgs.linver ]
+       ++ lib.optionals config.programs.execbin.enable [ atpkgs.execbin ];
 
     systemd.packages = with atpkgs; lib.optionals cfg.polkit.enable [
       uac-polkit-agent
