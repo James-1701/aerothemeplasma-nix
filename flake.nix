@@ -94,6 +94,7 @@
             squashaero = self.callPackage ./pkgs/aeroshell/kwin/squashaero.nix {};
             thumbnail-aero = self.callPackage ./pkgs/aeroshell/kwin/thumbnail-aero.nix {};
 
+            default-rules = self.callPackage ./pkgs/aeroshell/plasma/default-rules.nix {};
             kcmloader = self.callPackage ./pkgs/aeroshell/plasma/kcmloader.nix {};
             libshowdesktop = self.callPackage ./pkgs/aeroshell/plasma/libshowdesktop.nix {};
             libtaskmanager = self.callPackage ./pkgs/aeroshell/plasma/libtaskmanager.nix {};

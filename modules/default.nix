@@ -54,7 +54,7 @@ in
     environment.systemPackages = with atpkgs; [
       pkgs.kdePackages.qtmultimedia
       libplasma libtaskmanager libshowdesktop
-      plasma-workspace
+      plasma-workspace default-rules
     ] ++ (with atpkgs; lib.optionals cfg.fonts.enable [
       segoe-ui lucida-console
     ]) ++ (with atpkgs; lib.optionals cfg.aerothemeplasma.enable [
