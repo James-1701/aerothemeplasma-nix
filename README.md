@@ -87,7 +87,7 @@ I can't call them frequently asked questions when I haven't been asked them a si
 ## Special thanks
 * [WackyIdeas](https://github.com/WackyIdeas) and contributors for developing [AeroThemePlasma](https://gitgud.io/wackyideas/aerothemeplasma)
 * [aean0x](https://github.com/aean0x/.dotfiles/tree/20a3dd32b3ddbd752c93c9f38e03e76dbbd3ce87/aerotheme) and [Rotlug](https://github.com/Rotlug/aerothemeplasma-nixos) for prior art in packaging AeroThemePlasma, though this flake deviates significantly
-* [ech0devv](https://github.com/ech0devv) and [Rotlug](https://github.com/Rotlug) for writing derivations for [the Sevulet suite](pkgs/external/software/sevulet) and [`atpootb`](pkgs/aerothemeplasma/plasma/atpootb.nix) respectively
+* [ech0devv](https://github.com/ech0devv) and [Rotlug](https://github.com/Rotlug) for writing derivations for [the Sevulet suite](https://github.com/nyakase/aerothemeplasma-nix/pull/14) and [`atpootb`](pkgs/aerothemeplasma/plasma/atpootb.nix) respectively
 * [DuCanhGH](<https://github.com/DuCanhGH/snowflakes/tree/main/modules/nixos/aero>) for additional prior art in packaging AeroThemePlasma, and being friendly about it
 * Chris Lejman of [brokenTONE](https://brokentone.net) for creating the ["Not so ordinary life"](https://brokentone.net/wall/147-not-so-ordinary-life/) wallpaper, used in the demo screenshot
 

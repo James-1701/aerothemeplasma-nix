@@ -16,6 +16,7 @@ in
     polkit.enable = lib.mkEnableOption "nothing";
     sddm.enable = lib.mkEnableOption "nothing";
   };
+  options.programs.sevulet.enable = lib.mkEnableOption "nothing";
   
   options.programs = {
     aeroshell = {
@@ -29,7 +30,6 @@ in
       };
     };
 
-    sevulet.enable = lib.mkEnableOption "the Sevulet software suite";
     linver.enable = lib.mkEnableOption "the Linver application";
     execbin.enable = lib.mkEnableOption "the ExecBin application";
   };
@@ -47,6 +47,13 @@ in
           the changes in Plasma 6.6, fits in better with other NixOS options, and is needed to add 
           VistaThemePlasma in the future. Sorry for the trouble! For how the options work now, see:
           https://github.com/nyakase/aerothemeplasma-nix#configuration
+        '';
+      }
+      {
+        assertion = !config.programs.sevulet.enable;
+        message = ''
+          The Sevulet software suite was deleted by its author and is no longer available. 
+          Please remove the "programs.sevulet.enable = true;" option from your configuration.
         '';
       }
     ];
