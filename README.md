@@ -4,15 +4,13 @@ This [flake](https://wiki.nixos.org/wiki/Flakes) can be used to install the Wayl
 ![Demo of AeroThemePlasma on a running NixOS system](demo.png)
 
 ## Installation
-### Fonts
-Skip this section if you don't want to use `programs.aeroshell.fonts.enable` (required for the Plymouth theme).
-
-Please get some font files from an up-to-date install of Windows 7. To check the version of a font with fontconfig, use `fc-query -f "%{fontversion}" FILE.ttf`. The expected files from C:\Windows\Fonts are as follows:
+### Fonts (optional)
+Certain fonts are required to build the [Plymouth](https://www.freedesktop.org/wiki/Software/Plymouth)-based boot animation. If you want it, please open `C:\Windows\Fonts` on an [up-to-date](https://github.com/nyakase/aerothemeplasma-nix/issues/15#issuecomment-3941785456) Windows 7 install and copy over these files:
 
 * Segoe UI: segoeui.ttf (336200), segoeuib.ttf (336200), segoeuii.ttf (336200), seguisb.ttf (327680)
 * Lucida Console: lucon.ttf (327680)
 
-Add the font files to the Nix store with `nix store add-file FILE.ttf`.
+To check font versions, use `fc-query -f "%{fontversion}" FILE.ttf`. Add files to the Nix store with `nix store add-file FILE.ttf`.
 
 ### Modules
 Add aerothemeplasma-nix as a flake input and NixOS module. 
@@ -46,22 +44,23 @@ Add aerothemeplasma-nix as a flake input and NixOS module.
 </details>
 
 ### Configuration
-To install the theme, add this to your NixOS configuration:
+To install the theme, add this to your NixOS configuration. You can omit the options that are not "required" if unwanted. "Font files needed" means you need to follow [the "Fonts" section](#fonts) if using those options.
+
 ```nix
 # ./configuration.nix
 boot.plymouth.enable = true;
 services.displayManager.sddm.enable = true;
-services.desktopManager.plasma6.enable = true;
-services.displayManager.defaultSession = "aerothemeplasma"; # if you want
+services.desktopManager.plasma6.enable = true; # required
+services.displayManager.defaultSession = "aerothemeplasma";
 
 programs.aeroshell = {
-  enable = true;
-  fonts.enable = true;
+  enable = true; # required
+  fonts.enable = true; # font files needed
   polkit.enable = true;
   aerothemeplasma = {
-    enable = true;
+    enable = true; # required
     sddm.enable = true;
-    plymouth.enable = true;
+    plymouth.enable = true; # font files needed
   };
 };
 ```
@@ -70,6 +69,14 @@ programs.aeroshell = {
 Rebuild and reboot your system. You can open the session list with the bottom-left button if using the SDDM theme. Select the "AeroThemePlasma (Wayland)" session if not pre-selected.
 
 When booting into the session for the first time, a setup wizard will launch and help you finish applying the Plasma theme. Have fun!
+
+## Uninstallation
+Remove the [NixOS module](#modules) and [associated options](#configuration) from your configuration. You can switch back to your old theme in [System Settings](https://userbase.kde.org/System_Settings):
+
+1. Under "Colors & Themes", pick your old Global Theme (the default is Breeze).
+2. Under "Text & Fonts", choose your old fonts (the default is Noto Sans).
+
+Lastly, delete the `~/.config/aerothemeplasmarc` file. Not doing so prevents the setup wizard from launching on reinstallation.
 
 ## Potential questions
 ### Why is X11 unsupported?
