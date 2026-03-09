@@ -44,7 +44,7 @@ Add aerothemeplasma-nix as a flake input and NixOS module.
 </details>
 
 ### Configuration
-To install the theme, add this to your NixOS configuration. You can omit the options that are not "required" if unwanted. "Font files needed" means you need to follow [the "Fonts" section](#fonts) if using those options.
+To install the theme, add this to your NixOS configuration. You can omit the options that are not "required" if unwanted. "Font files needed" means you need to follow [the "Fonts" section](#fonts-optional) if using those options.
 
 ```nix
 # ./configuration.nix
