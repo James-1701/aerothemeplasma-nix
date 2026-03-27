@@ -63,9 +63,7 @@ in
       pkgs.kdePackages.qtmultimedia
       libplasma libtaskmanager libshowdesktop
       plasma-workspace default-rules
-    ] ++ (with atpkgs; lib.optionals cfg.fonts.enable [
-      segoe-ui lucida-console
-    ]) ++ (with atpkgs; lib.optionals cfg.aerothemeplasma.enable [
+    ] ++ (with atpkgs; lib.optionals cfg.aerothemeplasma.enable [
       cursors icons sounds
 
       atpootb authui7 color-scheme kvantum-windows7aero
@@ -88,6 +86,9 @@ in
     ]) ++ lib.optionals config.programs.linver.enable [ atpkgs.linver ]
        ++ lib.optionals config.programs.execbin.enable [ atpkgs.execbin ];
 
+    fonts.packages = with atpkgs; lib.mkIf cfg.fonts.enable [ 
+      segoe-ui lucida-console 
+    ];
     systemd.packages = with atpkgs; lib.optionals cfg.polkit.enable [
       uac-polkit-agent
     ];
