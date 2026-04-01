@@ -5,11 +5,13 @@
 }:
 kdePackages.plasma-workspace.overrideAttrs (oldAttrs: {
   pname = "aeroshell";
+  outputs = lib.remove "sessions" oldAttrs.outputs;
   cmakeFlags = oldAttrs.cmakeFlags ++ [
     (lib.cmakeFeature "Plasma_DIR" "${libplasma.dev}/lib/cmake/Plasma")
     (lib.cmakeFeature "PlasmaQuick_DIR" "${libplasma.dev}/lib/cmake/PlasmaQuick")
   ];
   ninjaFlags = [ "plasmashell" "kworkspace" ];
+
   postPatch = ''
     # rename plasmashell and kworkspace
     echo "set_target_properties(plasmashell PROPERTIES OUTPUT_NAME aeroshell)" >> CMakeLists.txt
