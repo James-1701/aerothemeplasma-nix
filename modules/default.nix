@@ -71,7 +71,7 @@ in
 
       keyboardlayout win7showdesktop
       seventasks sevenstart aeroglassblur
-      shell smod smodglow desktopcontainment
+      shell smod desktopcontainment
       systemtray notifications volume flip3d
       digitalclocklite panel thumbnail-aero
       fadingpopupsaero squashaero loginaero
