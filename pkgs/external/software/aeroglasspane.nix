@@ -8,20 +8,20 @@
 }:
 stdenv.mkDerivation {
   pname = "aeroglasspane";
-  version = "2025-06-30";
+  version = "2026-04-21";
 
   src = fetchFromGitLab {
     domain = "gitgud.io";
     owner = "wackyideas";
     repo = "aero-glass-pane";
-    rev = "89401490368b03673d2ecff3a77b042438db5304";
-    hash = "sha256-FOo70y56T+RnN1+og5hpW3SgQ2QIDb2PpyB6urCaTDI=";
+    rev = "a976b1e0498cde890e2b4f042c4b0567a890b4bb";
+    hash = "sha256-Yo3vlrLfnBheHnwGfIBSCfhOOAqZxcAtcpgKC6Zvv0w=";
   };
 
   buildInputs = [ qt6.qtbase kdePackages.kwindowsystem ];
   nativeBuildInputs = [ cmake qt6.wrapQtAppsHook ];
 
   meta = {
-    mainProgram = "test";
+    mainProgram = "aero-glass-pane";
   };
 }
