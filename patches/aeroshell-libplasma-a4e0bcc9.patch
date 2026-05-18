@@ -1,0 +1,27 @@
+From a4e0bcc9e01434e5680070197e0e217ba50699c8 Mon Sep 17 00:00:00 2001
+From: wackyideas <wackyideas535@gmail.com>
+Date: Sat, 21 Feb 2026 19:30:26 +0100
+Subject: [PATCH] Remove assertion failure on empty dialogs
+
+This will likely be temporary as to give enough time to sort out all
+instances of this in AeroShell.
+---
+ src/plasmaquick/dialog.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/plasmaquick/dialog.cpp b/src/plasmaquick/dialog.cpp
+index 5a1c67b3c..853a5539e 100644
+--- a/src/plasmaquick/dialog.cpp
++++ b/src/plasmaquick/dialog.cpp
+@@ -617,7 +617,7 @@ void DialogPrivate::syncToMainItemSize()
+     }
+     if (mainItem->width() <= 0 || mainItem->height() <= 0) {
+         qmlWarning(q) << "trying to show an empty dialog";
+-        Q_ASSERT(false);
++        //Q_ASSERT(false);
+     }
+ 
+     updateTheme();
+-- 
+GitLab
+

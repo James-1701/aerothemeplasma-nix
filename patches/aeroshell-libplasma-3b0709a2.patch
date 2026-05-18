@@ -1,0 +1,423 @@
+From 3b0709a266625c00d3e7d09d4eeecb9ff52e4d41 Mon Sep 17 00:00:00 2001
+From: wackyideas <wackyideas535@gmail.com>
+Date: Wed, 24 Dec 2025 11:02:29 +0100
+Subject: [PATCH] Apply ATP patches to libplasma
+
+---
+ .../core/private/DefaultToolTip.qml           | 19 +++--
+ src/declarativeimports/core/tooltiparea.cpp   | 72 +++++++++++++------
+ src/declarativeimports/core/tooltiparea.h     | 32 +++++++--
+ src/declarativeimports/core/tooltipdialog.cpp |  2 +
+ src/plasmaquick/plasmawindow.cpp              | 10 ++-
+ src/plasmaquick/popupplasmawindow.cpp         | 47 ++++++++----
+ 6 files changed, 126 insertions(+), 56 deletions(-)
+
+diff --git a/src/declarativeimports/core/private/DefaultToolTip.qml b/src/declarativeimports/core/private/DefaultToolTip.qml
+index baf0ef9af..315b31cb0 100644
+--- a/src/declarativeimports/core/private/DefaultToolTip.qml
++++ b/src/declarativeimports/core/private/DefaultToolTip.qml
+@@ -8,30 +8,25 @@ import QtQuick
+ import QtQuick.Layouts
+ import org.kde.plasma.components as PlasmaComponents
+ import org.kde.kirigami as Kirigami
++import org.kde.ksvg as KSvg
+ 
+-/*!
+- * Internal type containing the default layout of a tooltip.
+- */
+ Item {
+     id: root
+     property Item toolTip
+-    property int preferredTextWidth: Kirigami.Units.gridUnit * 20
++    property int preferredTextWidth: Kirigami.Units.gridUnit * 10
+ 
+-    implicitWidth: mainLayout.implicitWidth + Kirigami.Units.largeSpacing * 2
+-    implicitHeight: mainLayout.implicitHeight + Kirigami.Units.largeSpacing * 2
++    implicitWidth: mainLayout.implicitWidth
++    implicitHeight: mainLayout.implicitHeight
+ 
+     LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
+     LayoutMirroring.childrenInherit: true
+ 
+-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
++    Kirigami.Theme.colorSet: Kirigami.Theme.View
+     Kirigami.Theme.inherit: false
+ 
+     RowLayout {
+         id: mainLayout
+         anchors.centerIn: parent
+-        anchors.margins: Kirigami.Units.largeSpacing
+-
+-        spacing: Kirigami.Units.gridUnit
+ 
+         Image {
+             source: root.toolTip ? root.toolTip.image : ""
+@@ -46,6 +41,7 @@ Item {
+             visible: root.toolTip !== null && root.toolTip.icon !== "" && root.toolTip.image === "" && valid
+             Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+             Layout.preferredHeight: Kirigami.Units.iconSizes.medium
++            Layout.leftMargin: Kirigami.Units.smallSpacing*2
+         }
+ 
+         ColumnLayout {
+@@ -53,13 +49,14 @@ Item {
+             spacing: 0
+ 
+             Kirigami.Heading {
+-                level: 3
++                level: 5
+                 Layout.fillWidth: true
+                 elide: Text.ElideRight
+                 wrapMode: Text.Wrap
+                 text: root.toolTip ? root.toolTip.mainText : ""
+                 textFormat: Text.PlainText
+                 visible: text !== ""
++                opacity: 0.75
+             }
+ 
+             PlasmaComponents.Label {
+diff --git a/src/declarativeimports/core/tooltiparea.cpp b/src/declarativeimports/core/tooltiparea.cpp
+index a66190977..d6ed0bc86 100644
+--- a/src/declarativeimports/core/tooltiparea.cpp
++++ b/src/declarativeimports/core/tooltiparea.cpp
+@@ -17,6 +17,7 @@
+ 
+ #include <KSharedConfig>
+ #include <KWindowEffects>
++#include <KWindowSystem>
+ #include <Plasma/Applet>
+ 
+ using namespace Qt::Literals;
+@@ -34,6 +35,8 @@ ToolTipArea::ToolTipArea(QQuickItem *parent)
+     , m_interactive(false)
+     , m_timeout(-1)
+     , m_usingDialog(false)
++    , m_backgroundHints(PlasmaQuick::PlasmaWindow::SolidBackground)
++    , m_windowTitle(QStringLiteral(""))
+ {
+     setAcceptHoverEvents(true);
+     setFiltersChildMouseEvents(true);
+@@ -150,29 +153,45 @@ void ToolTipArea::showToolTip()
+     dlg->setMainItem(mainItem());
+     dlg->setInteractive(m_interactive);
+ 
+-    switch (location) {
+-    case Plasma::Types::Floating:
+-    case Plasma::Types::Desktop:
+-    case Plasma::Types::FullScreen:
++    if(location == (Plasma::Types::Desktop | Plasma::Types::Floating)) {
+         dlg->setFloating(true);
+-        dlg->setPopupDirection(Qt::BottomEdge);
+-        break;
+-    case Plasma::Types::TopEdge:
+-        dlg->setFloating(false);
+-        dlg->setPopupDirection(Qt::BottomEdge);
+-        break;
+-    case Plasma::Types::BottomEdge:
+-        dlg->setFloating(false);
+-        dlg->setPopupDirection(Qt::TopEdge);
+-        break;
+-    case Plasma::Types::LeftEdge:
+-        dlg->setFloating(false);
+-        dlg->setPopupDirection(Qt::RightEdge);
+-        break;
+-    case Plasma::Types::RightEdge:
+-        dlg->setFloating(false);
+-        dlg->setPopupDirection(Qt::LeftEdge);
+-        break;
++        dlg->setPopupDirection((Qt::Edge)0);
++    } else {
++        switch (location) {
++        case Plasma::Types::Desktop:
++        case Plasma::Types::FullScreen:
++        case Plasma::Types::Floating:
++            dlg->setFloating(true);
++            dlg->setPopupDirection(Qt::BottomEdge);
++            break;
++        case Plasma::Types::TopEdge:
++            dlg->setFloating(false);
++            dlg->setPopupDirection(Qt::BottomEdge);
++            break;
++        case Plasma::Types::BottomEdge:
++            dlg->setFloating(false);
++            dlg->setPopupDirection(Qt::TopEdge);
++            break;
++        case Plasma::Types::LeftEdge:
++            dlg->setFloating(false);
++            dlg->setPopupDirection(Qt::RightEdge);
++            break;
++        case Plasma::Types::RightEdge:
++            dlg->setFloating(false);
++            dlg->setPopupDirection(Qt::LeftEdge);
++            break;
++        }
++    }
++
++    dlg->setBackgroundHints(m_backgroundHints);
++    dlg->setTitle(m_windowTitle); // Wayland sees this just fine
++    // Ugly hack to make this tooltip identifiable on X11
++    if (KWindowSystem::isPlatformX11() && m_backgroundHints == PlasmaQuick::PlasmaWindow::StandardBackground) {
++        Qt::WindowFlags flags = dlg->flags();
++        dlg->setFlags(flags | Qt::Dialog);
++    } else {
++        Qt::WindowFlags flags = dlg->flags();
++        dlg->setFlags((flags & ~Qt::Dialog) | Qt::ToolTip);
+     }
+ 
+     dlg->setVisible(true);
+@@ -182,6 +201,11 @@ void ToolTipArea::showToolTip()
+     dlg->keepalive();
+ }
+ 
++void ToolTipArea::setWindowTitle(QString windowTitle)
++{
++    m_windowTitle = windowTitle;
++}
++
+ QString ToolTipArea::mainText() const
+ {
+     return m_mainText;
+@@ -277,6 +301,10 @@ void ToolTipArea::setTimeout(int timeout)
+ {
+     m_timeout = timeout;
+ }
++void ToolTipArea::setBackgroundHints(PlasmaQuick::PlasmaWindow::BackgroundHints backgroundHints)
++{
++    m_backgroundHints = backgroundHints;
++}
+ 
+ void ToolTipArea::hideToolTip()
+ {
+diff --git a/src/declarativeimports/core/tooltiparea.h b/src/declarativeimports/core/tooltiparea.h
+index ee85be266..74c23146d 100644
+--- a/src/declarativeimports/core/tooltiparea.h
++++ b/src/declarativeimports/core/tooltiparea.h
+@@ -10,7 +10,6 @@
+ #define TOOLTIPOBJECT_H
+ 
+ #include <Plasma/Plasma>
+-
+ #include <QPointer>
+ #include <QQuickItem>
+ #include <QTimer>
+@@ -18,6 +17,8 @@
+ 
+ #include <KConfigWatcher>
+ 
++#include "plasmawindow.h"
++
+ class QQuickItem;
+ class ToolTipDialog;
+ 
+@@ -131,6 +132,18 @@ class ToolTipArea : public QQuickItem
+      */
+     Q_PROPERTY(int timeout MEMBER m_timeout WRITE setTimeout)
+ 
++    /**
++     * Set the background for the tooltip.
++     * By default, the solid version of the tooltip background is used.
++     */
++    Q_PROPERTY(PlasmaQuick::PlasmaWindow::BackgroundHints backgroundHints MEMBER m_backgroundHints WRITE setBackgroundHints)
++
++    /**
++     * Set the window title for the tooltip.
++     * This is used for window detection by other components such as KWin effects.
++     */
++    Q_PROPERTY(QString windowTitle MEMBER m_windowTitle WRITE setWindowTitle)
++
+ public:
+     explicit ToolTipArea(QQuickItem *parent = nullptr);
+     ~ToolTipArea() override;
+@@ -165,20 +178,25 @@ public:
+ 
+     void setTimeout(int timeout);
+ 
++    void setBackgroundHints(PlasmaQuick::PlasmaWindow::BackgroundHints backgroundHints);
++
++    void setWindowTitle(QString windowTitle);
++    /// @endcond
++
+ public Q_SLOTS:
+ 
+-    /*!
++    /**
+      * Shows the tooltip.
+      * \since 5.73
+      */
+     void showToolTip();
+ 
+-    /*!
++    /**
+      * Hides the tooltip after a grace period if shown. Does not affect whether the tooltip area is active.
+      */
+     void hideToolTip();
+ 
+-    /*!
++    /**
+      * Hides the tooltip immediately, in comparison to hideToolTip.
+      * \since 5.84
+      */
+@@ -202,13 +220,13 @@ Q_SIGNALS:
+     void locationChanged();
+     void activeChanged();
+     void interactiveChanged();
+-    /*!
++    /**
+      * Emitted just before the tooltip dialog is shown.
+      *
+      * \since 5.45
+      */
+     void aboutToShow();
+-    /*!
++    /**
+      * Emitted when the tooltip's visibility changes.
+      *
+      * \since 5.88
+@@ -236,6 +254,8 @@ private:
+     bool m_interactive;
+     int m_interval;
+     int m_timeout;
++    PlasmaQuick::PlasmaWindow::BackgroundHints m_backgroundHints;
++    QString m_windowTitle;
+ 
+     // ToolTipDialog is not a Q_GLOBAL_STATIC because QQuickwindows as global static
+     // are deleted too late after some stuff in the qml runtime has already been deleted,
+diff --git a/src/declarativeimports/core/tooltipdialog.cpp b/src/declarativeimports/core/tooltipdialog.cpp
+index 46138c707..1f02d7da7 100644
+--- a/src/declarativeimports/core/tooltipdialog.cpp
++++ b/src/declarativeimports/core/tooltipdialog.cpp
+@@ -34,6 +34,8 @@ ToolTipDialog::ToolTipDialog()
+     }
+     setFlags(flags);
+ 
++    connect(this, &PlasmaWindow::backgroundHintsChanged, this, &ToolTipDialog::updateSize);
++
+     m_hideTimer.setSingleShot(true);
+     connect(&m_hideTimer, &QTimer::timeout, this, [this]() {
+         setVisible(false);
+diff --git a/src/plasmaquick/plasmawindow.cpp b/src/plasmaquick/plasmawindow.cpp
+index 4aaf54821..c354b90fc 100644
+--- a/src/plasmaquick/plasmawindow.cpp
++++ b/src/plasmaquick/plasmawindow.cpp
+@@ -32,13 +32,14 @@ public:
+     void updateMainItemGeometry();
+     PlasmaWindow *q;
+     DialogShadows *shadows;
+-    // Keep a theme instance as a member to create one as soon as possible,
++    // Keep a theme instance as a memeber to create one as soon as possible,
+     // as Theme creation will set KSvg to correctly fetch images form the Plasma Theme.
+     // This makes sure elements are correct, both in the dialog surface and the shadows.
+     Plasma::Theme theme;
+     QPointer<QQuickItem> mainItem;
+     DialogBackground *dialogBackground;
+     PlasmaWindow::BackgroundHints backgroundHints = PlasmaWindow::StandardBackground;
++    QString svgPrefix;
+ };
+ 
+ PlasmaWindow::PlasmaWindow(const QString &svgPrefix)
+@@ -47,7 +48,7 @@ PlasmaWindow::PlasmaWindow(const QString &svgPrefix)
+ {
+     setColor(QColor(Qt::transparent));
+     setFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+-
++    d->svgPrefix = svgPrefix;
+     d->shadows = DialogShadows::instance(svgPrefix);
+     d->dialogBackground = new DialogBackground(contentItem());
+     d->dialogBackground->setImagePath(svgPrefix);
+@@ -217,7 +218,10 @@ void PlasmaWindow::setBackgroundHints(BackgroundHints hints)
+     if (d->backgroundHints == PlasmaWindow::SolidBackground) {
+         prefix = QStringLiteral("solid/");
+     }
+-    d->dialogBackground->setImagePath(prefix + QStringLiteral("dialogs/background"));
++    d->dialogBackground->setImagePath(prefix + d->svgPrefix);
++    d->shadows->removeWindow(this);
++    d->shadows = DialogShadows::instance(prefix + d->svgPrefix);
++    d->shadows->addWindow(this, d->dialogBackground->enabledBorders());
+ 
+     Q_EMIT backgroundHintsChanged();
+ }
+diff --git a/src/plasmaquick/popupplasmawindow.cpp b/src/plasmaquick/popupplasmawindow.cpp
+index bb0dfb90a..6fcf3105b 100644
+--- a/src/plasmaquick/popupplasmawindow.cpp
++++ b/src/plasmaquick/popupplasmawindow.cpp
+@@ -7,6 +7,8 @@
+ 
+ #include <kwindoweffects.h>
+ #include <kwindowsystem.h>
++#include <KConfigGroup>
++#include <KSharedConfig>
+ 
+ #include "debug_p.h"
+ #include <QGuiApplication>
+@@ -57,7 +59,7 @@ PopupPlasmaWindowPrivate::PopupPlasmaWindowPrivate(PopupPlasmaWindow *_q)
+  * @param anchorRect - the rect around where the popup should be placed relative to the parent window
+  * @param relativePopupPosition - the final rect of the popup relative to the parent window
+  *
+- * This is based purely on position in preparation for being called in a wayland configure event
++ * This is based purely on position in prepartion for being called in a wayland configure event
+  */
+ void PopupPlasmaWindowPrivate::updateEffectivePopupDirection(const QRect &anchorRect, const QRect &relativePopupPosition)
+ {
+@@ -139,7 +141,6 @@ void PopupPlasmaWindowPrivate::updatePosition()
+     q->setTransientParent(m_visualParent->window());
+     TransientPlacementHint placementHint;
+     QRectF parentAnchorRect = QRectF(m_visualParent->mapToScene(QPointF(0, 0)), m_visualParent->size());
+-
+     if (!m_floating) {
+         QRect windowVisibleRect = m_visualParent->window()->mask().boundingRect();
+         // pad parentAnchorRect to the window it's in, so that the popup appears outside the panel
+@@ -156,21 +157,39 @@ void PopupPlasmaWindowPrivate::updatePosition()
+         }
+     }
+ 
+-    placementHint.setParentAnchorArea(parentAnchorRect.toRect());
+-    placementHint.setParentAnchor(m_popupDirection);
+-    placementHint.setPopupAnchor(PlasmaQuickPrivate::oppositeEdge(m_popupDirection));
+-    placementHint.setConstrainByAnchorWindow(true);
+-    placementHint.setFlipConstraintAdjustments(m_floating ? Qt::Vertical : Qt::Orientations());
+-    placementHint.setMargin(m_margin);
++    QRect popupPosition;
++
++    if(m_floating && q->backgroundHints() != PlasmaQuick::PlasmaWindow::StandardBackground && m_popupDirection == 0) {
+ 
+-    const QRect popupPosition = TransientPlacementHelper::popupRect(q, placementHint);
++        KConfigGroup mousecfg(KSharedConfig::openConfig(QStringLiteral("kcminputrc")), QStringLiteral("Mouse"));
++        const int cursorSize  = mousecfg.readEntry(QStringLiteral("cursorSize"), 24);
++        QPoint mousePos = QCursor::pos() + QPoint(0, cursorSize*0.75);
+ 
+-    QRect relativePopupPosition = popupPosition;
+-    if (m_visualParent->window()) {
+-        relativePopupPosition = relativePopupPosition.translated(-m_visualParent->window()->position());
++        QScreen *screen = QGuiApplication::screenAt(mousePos);
++        if (screen) {
++            const QRect screenGeometry = screen->geometry();
++            int diffX = qMax(0, mousePos.x() + popupPosition.width() - (screenGeometry.x() + screenGeometry.width()));
++            int diffY = qMax(0, mousePos.y() + popupPosition.height() - (screenGeometry.y() + screenGeometry.height()));
++            mousePos -= QPoint(diffX, diffY);
++            popupPosition = QRect(mousePos, popupPosition.size());
++        }
++    } else {
++        placementHint.setParentAnchorArea(parentAnchorRect.toRect());
++        placementHint.setParentAnchor(m_popupDirection);
++        placementHint.setPopupAnchor(PlasmaQuickPrivate::oppositeEdge(m_popupDirection));
++        placementHint.setConstrainByAnchorWindow(true);
++        placementHint.setFlipConstraintAdjustments(m_floating ? Qt::Vertical : Qt::Orientations());
++        placementHint.setMargin(m_margin);
++
++        popupPosition = TransientPlacementHelper::popupRect(q, placementHint);
++
++        QRect relativePopupPosition = popupPosition;
++        if (m_visualParent->window()) {
++            relativePopupPosition = relativePopupPosition.translated(-m_visualParent->window()->position());
++        }
++        updateEffectivePopupDirection(parentAnchorRect.toRect(), relativePopupPosition);
++        updateSlideEffect(popupPosition);
+     }
+-    updateEffectivePopupDirection(parentAnchorRect.toRect(), relativePopupPosition);
+-    updateSlideEffect(popupPosition);
+ 
+     if (KWindowSystem::isPlatformX11()) {
+         updatePositionX11(popupPosition.topLeft());
+-- 
+GitLab
+
